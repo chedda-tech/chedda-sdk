@@ -5,6 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "main": "main/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -16,7 +17,9 @@
     "test": "tsdx test",
     "prepublishOnly": "tsdx build"
   },
-  "keywords": ["chedda, ethereum"],
+  "keywords": [
+    "chedda, ethereum"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^29.5.5",
