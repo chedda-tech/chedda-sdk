@@ -1,0 +1,34 @@
+{
+  "name": "chedda-sdk",
+  "version": "1.0.0",
+  "description": "SDK for interacting with the Chedda platform's smart contracts and services.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "main/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdx build",
+    "start": "tsdx watch",
+    "test": "tsdx test",
+    "prepublishOnly": "tsdx build"
+  },
+  "keywords": ["chedda, ethereum"],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "prettier": "^3.0.3",
+    "tsdx": "^0.14.1"
+  },
+  "dependencies": {
+    "ethers": "^5.4.7"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true
+  }
+}
