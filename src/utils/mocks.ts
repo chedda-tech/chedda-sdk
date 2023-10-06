@@ -26,3 +26,14 @@ export const mockCheddaVault: Partial<CheddaVault> = {
   accountPendingAmount: jest.fn(),
   initiateContract: jest.fn(),
 }
+
+export const mockTokenService = {
+  name: jest.fn(),
+  symbol: jest.fn(),
+  approve: jest.fn(),
+  allowance: jest.fn(),
+  balanceOf: jest.fn(),
+  ownedTokens: jest.fn(),
+  transfer: jest.fn(),
+  totalSupply: jest.fn(),
+}
