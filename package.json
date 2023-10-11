@@ -15,6 +15,7 @@
     "build": "tsdx build",
     "start": "tsdx watch",
     "test": "tsdx test --detectOpenHandles",
+    "coverage": "tsdx test --coverage --coverageReporters='text-summary'",
     "prepublishOnly": "tsdx build"
   },
   "keywords": [
