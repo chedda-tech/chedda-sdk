@@ -23,20 +23,20 @@ yarn build
 ### How to use
 
 ```javascript
-import { Chedda } from "../dist/index.js";
-import contractAbi from "./contractAbi.json" assert { type: "json" };
-import { environment } from "./enviroment.js";
+import { Chedda } from '../dist/index.js'
+import { contractAddress, address } from './constants.js'
+import { environment } from './enviroment.js'
+import { MockSigner } from './mockSigner.js'
 
-const provider = environment.webSocketUrl;
-const chedda = new Chedda(provider);
-const vault = chedda.vault();
+const provider = environment.webSocketUrl
+const signer = new MockSigner(address)
+const chedda = new Chedda(provider)
 
+const vault = chedda.vault(contractAddress, signer)
 
-console.log(
-  vault.contractAt(
-    "0xB27595Bedd063935ca146EB46ee7CaE40F696f7E",
-    contractAbi.abi
+const utilization = await vault.utilization()
 
-  )
-);
+const depositAsset = async () => {
+  await vault.depositAsset(amount, address)
+}
 ```
