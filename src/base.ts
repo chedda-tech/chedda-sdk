@@ -1,7 +1,8 @@
 import { ethers, Signer } from 'ethers'
-import { TokenService } from './token'
-import { CheddaVault } from './vault'
+import { ERC20Token } from './erc20Token'
+import { LendingPool } from './lendingPool'
 import { PriceOracle } from './priceOracle'
+import { PoolLens } from './poolLens'
 
 export class Chedda {
   provider: ethers.providers.WebSocketProvider
@@ -10,12 +11,16 @@ export class Chedda {
     this.provider = new ethers.providers.WebSocketProvider(provider)
   }
 
-  vault(address: string, signer: Signer) {
-    return new CheddaVault(this.provider, address, signer)
+  lendingPool(address: string, signer: Signer) {
+    return new LendingPool(this.provider, address, signer)
   }
 
-  token(address: string, signer: Signer) {
-    return new TokenService(this.provider, address, signer)
+  erc20token(address: string, signer: Signer) {
+    return new ERC20Token(this.provider, address, signer)
+  }
+
+  poolLens(address: string, signer: Signer) {
+    return new PoolLens(this.provider, address, signer)
   }
 
   priceOracle() {
