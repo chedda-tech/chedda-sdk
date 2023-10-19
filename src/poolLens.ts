@@ -21,7 +21,7 @@ export class PoolLens {
     this.contract = new ethers.Contract(this.address, LendingPoolLens.abi, this.provider)
   }
 
-  async activePools(): Promise<void[]> {
+  async activePools(): Promise<string[]> {
     try {
       return await this.contract.activePools()
     } catch (error) {
