@@ -1,6 +1,6 @@
 import { ethers, Signer } from 'ethers'
-import { mockAddress } from '../constants'
 import { PoolLens } from '../poolLens'
+import { mockAddress } from '../utils/constants'
 import { mockPoolLens } from '../utils/mocks'
 
 jest.mock('ethers')

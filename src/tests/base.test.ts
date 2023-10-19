@@ -1,6 +1,6 @@
 import { ethers, Signer } from 'ethers'
 import { Chedda } from '../base'
-import { mockAddress, webSocketUrl } from '../constants'
+import { mockAddress, webSocketUrl } from '../utils/constants'
 
 // Mock WebSocketProvider class
 jest.mock('ethers')

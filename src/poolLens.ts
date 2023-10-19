@@ -1,7 +1,6 @@
 import { Contract, ethers, Signer } from 'ethers'
 import LendingPoolLens from './artifacts/LendingPoolLens.json'
-
-/** Type for the contract interface */
+import { IAccountInfo, IAggregateStats, IPoolCollateralInfo, IPoolStats } from './utils/types'
 
 export class PoolLens {
   public contract!: Contract
@@ -14,9 +13,6 @@ export class PoolLens {
     this.initiateContract()
   }
 
-  /**
-   * Initializes the contract instance.
-   */
   private initiateContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
@@ -25,117 +21,124 @@ export class PoolLens {
     this.contract = new ethers.Contract(this.address, LendingPoolLens.abi, this.provider)
   }
 
-  async activePools() {
+  async activePools(): Promise<void[]> {
     try {
       return await this.contract.activePools()
     } catch (error) {
       this.handleContractError(error, 'getting active pools')
+      throw error
     }
   }
 
-  async getAggregateStats() {
+  async getAggregateStats(): Promise<IAggregateStats> {
     try {
       return await this.contract.getAggregateStats()
     } catch (error) {
       this.handleContractError(error, 'getting aggregate stats')
+      throw error
     }
   }
 
-  async getPoolAccountInfo(poolAddress: string, account: string) {
+  async getPoolAccountInfo(poolAddress: string, account: string): Promise<IAccountInfo> {
     try {
       return await this.contract.getPoolAccountInfo(poolAddress, account)
     } catch (error) {
       this.handleContractError(error, 'getting pool account information')
+      throw error
     }
   }
 
-  async getPoolCollateral(poolAddress: string) {
+  async getPoolCollateral(poolAddress: string): Promise<IPoolCollateralInfo[]> {
     try {
       return await this.contract.getPoolCollateral(poolAddress)
     } catch (error) {
       this.handleContractError(error, 'getting pool collateral')
+      throw error
     }
   }
 
-  async getPoolStats(poolAddress: string) {
+  async getPoolStats(poolAddress: string): Promise<IPoolStats> {
     try {
       return await this.contract.getPoolStats(poolAddress)
     } catch (error) {
       this.handleContractError(error, 'getting pool stats')
+      throw error
     }
   }
 
-  async getPoolStatsList(pools: string[]) {
+  async getPoolStatsList(pools: string[]): Promise<IPoolStats[]> {
     try {
       return await this.contract.getPoolStatsList(pools)
     } catch (error) {
       this.handleContractError(error, 'getting pool stats')
+      throw error
     }
   }
 
-  async owner() {
+  async owner(): Promise<string> {
     try {
       return await this.contract.owner()
     } catch (error) {
       this.handleContractError(error, 'getting owner')
+      throw error
     }
   }
 
-  async registeredPools() {
+  async registeredPools(): Promise<string[]> {
     try {
       return await this.contract.connect(this.signer).registeredPools()
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  async registerPool(pool: string, isActive: boolean) {
+  async registerPool(pool: string, isActive: boolean): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).registerPool(pool, isActive)
+      await this.contract.connect(this.signer).registerPool(pool, isActive)
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  async renounceOwnership() {
+  async renounceOwnership(): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).renounceOwnership()
+      await this.contract.connect(this.signer).renounceOwnership()
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  async setActive(pool: string, isActive: boolean) {
+  async setActive(pool: string, isActive: boolean): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).setActive(pool, isActive)
+      await this.contract.connect(this.signer).setActive(pool, isActive)
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  async transferOwnership(newOwner: string) {
+  async transferOwnership(newOwner: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).transferOwnership(newOwner)
+      await this.contract.connect(this.signer).transferOwnership(newOwner)
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  async unregisterPool(pool: string) {
+  async unregisterPool(pool: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).unregisterPool(pool)
+      await this.contract.connect(this.signer).unregisterPool(pool)
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
+      throw error
     }
   }
 
-  /**
-   * Generic error handling method.
-   * @param error The error to handle.
-   * @param message The error message to log.
-   */
   private handleContractError(error: any, message: string) {
     console.error(`Error in ${message}:`, error)
-    throw error
   }
 }

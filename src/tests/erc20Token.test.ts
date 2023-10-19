@@ -1,7 +1,7 @@
 import { ethers, Signer } from 'ethers'
-import { webSocketUrl, mockAddress } from '../constants'
 import { ERC20Token } from '../erc20Token'
 import { mockERC20Token } from '../utils/mocks'
+import { webSocketUrl, mockAddress } from '../utils/constants'
 
 jest.mock('ethers')
 

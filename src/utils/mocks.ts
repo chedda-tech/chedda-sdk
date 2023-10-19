@@ -55,6 +55,7 @@ export const mockLendingPool: Partial<LendingPool> = {
   name: jest.fn(),
   owner: jest.fn(),
   nonces: jest.fn(),
+  poolAsset: jest.fn(),
   previewDeposit: jest.fn(),
   previewMint: jest.fn(),
   previewRedeem: jest.fn(),

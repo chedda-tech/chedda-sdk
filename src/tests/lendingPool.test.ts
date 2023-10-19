@@ -1,7 +1,7 @@
 import { ethers, Signer, BigNumber } from 'ethers'
-import { mockAddress, webSocketUrl } from '../constants'
-import { mockLendingPool } from '../utils/mocks'
 import { LendingPool } from '../lendingPool'
+import { mockAddress, webSocketUrl } from '../utils/constants'
+import { mockLendingPool } from '../utils/mocks'
 
 jest.mock('ethers')
 
@@ -381,6 +381,11 @@ describe('LendingPool', () => {
 
     await lendingPool.nonces(address)
     expect(mockLendingPool.nonces).toHaveBeenCalledWith(address)
+  })
+
+  it('should get poolasset', async () => {
+    await lendingPool.poolAsset()
+    expect(mockLendingPool.poolAsset).toHaveBeenCalled()
   })
 
   it('should preview deposit', async () => {

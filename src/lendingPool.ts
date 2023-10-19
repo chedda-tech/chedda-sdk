@@ -1,5 +1,6 @@
 import { BigNumber, Contract, ethers, Signer } from 'ethers'
 import LendingPoolArtifact from './artifacts/LendingPool.json'
+import { ICollateralDeposited, IInterestRates } from './utils/types'
 
 export class LendingPool {
   public contract!: Contract
@@ -23,9 +24,9 @@ export class LendingPool {
     this.contract = new ethers.Contract(this.address, LendingPoolArtifact.abi, this.provider)
   }
 
-  async addCollateral(token: string, amount: BigNumber) {
+  async addCollateral(token: string, amount: BigNumber): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).addCollateral(token, amount)
+      await this.contract.connect(this.signer).addCollateral(token, amount)
     } catch (error) {
       console.error('Error in addCollateral:', error)
       throw error
@@ -33,7 +34,7 @@ export class LendingPool {
   }
 
   // ERC20
-  async approve(spender: string, amount: BigNumber) {
+  async approve(spender: string, amount: BigNumber): Promise<void> {
     try {
       await this.contract.connect(this.signer).approve(spender, amount)
     } catch (error) {
@@ -42,18 +43,18 @@ export class LendingPool {
     }
   }
 
-  async depositAsset(assets: BigNumber, receiver: string) {
+  async depositAsset(assets: BigNumber, receiver: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).deposit(assets, receiver)
+      await this.contract.connect(this.signer).deposit(assets, receiver)
     } catch (error) {
       console.error('Error in depositAsset:', error)
       throw error
     }
   }
 
-  async mintAsset(shares: BigNumber, receiver: string) {
+  async mintAsset(shares: BigNumber, receiver: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).mint(shares, receiver)
+      await this.contract.connect(this.signer).mint(shares, receiver)
     } catch (error) {
       console.error('Error in mintAsset:', error)
       throw error
@@ -63,79 +64,79 @@ export class LendingPool {
   //Todo: Permit
   //Need explanation
 
-  async putAmount(amount: BigNumber) {
+  async putAmount(amount: BigNumber): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).putAmount(amount)
+      await this.contract.connect(this.signer).putAmount(amount)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async putShares(shares: BigNumber) {
+  async putShares(shares: BigNumber): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).putShares(shares)
+      await this.contract.connect(this.signer).putShares(shares)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async redeem(shares: BigNumber, receiver: string, owner: string) {
+  async redeem(shares: BigNumber, receiver: string, owner: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).redeem(shares, receiver, owner)
+      await this.contract.connect(this.signer).redeem(shares, receiver, owner)
     } catch (error) {
       console.error('Error in redeem:', error)
       throw error
     }
   }
 
-  async removeCollateral(token: string, amount: BigNumber) {
+  async removeCollateral(token: string, amount: BigNumber): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).removeCollateral(token, amount)
+      await this.contract.connect(this.signer).removeCollateral(token, amount)
     } catch (error) {
       console.error('Error in removeCollateral:', error)
       throw error
     }
   }
 
-  async renounceOwnerShip() {
+  async renounceOwnerShip(): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).renounceOwnerShip()
+      await this.contract.connect(this.signer).renounceOwnerShip()
     } catch (error) {
       console.error('Error in renounceOwnerShip:', error)
       throw error
     }
   }
 
-  async setGauge(_gauge: string) {
+  async setGauge(_gauge: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).setGauge(_gauge)
+      await this.contract.connect(this.signer).setGauge(_gauge)
     } catch (error) {
       console.error('Error in setGauge:', error)
       throw error
     }
   }
 
-  async supply(amount: BigNumber, receiver: string, useAsCollateral: string) {
+  async supply(amount: BigNumber, receiver: string, useAsCollateral: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
+      await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
     } catch (error) {
       console.error('Error in supply:', error)
       throw error
     }
   }
 
-  async take(amount: BigNumber) {
+  async take(amount: BigNumber): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).take(amount)
+      await this.contract.connect(this.signer).take(amount)
     } catch (error) {
       console.error('Error in take:', error)
       throw error
     }
   }
 
-  async transfer(to: string, amount: BigNumber) {
+  async transfer(to: string, amount: BigNumber): Promise<void> {
     try {
       await this.contract.connect(this.signer).transfer(to, amount)
     } catch (error) {
@@ -144,7 +145,7 @@ export class LendingPool {
     }
   }
 
-  async transferFrom(from: string, to: string, amount: BigNumber) {
+  async transferFrom(from: string, to: string, amount: BigNumber): Promise<void> {
     try {
       await this.contract.connect(this.signer).transferFrom(from, to, amount)
     } catch (error) {
@@ -153,7 +154,7 @@ export class LendingPool {
     }
   }
 
-  async transferOwnership(newOwner: string) {
+  async transferOwnership(newOwner: string): Promise<void> {
     try {
       await this.contract.connect(this.signer).transferOwnership(newOwner)
     } catch (error) {
@@ -162,7 +163,7 @@ export class LendingPool {
     }
   }
 
-  async withdraw(assetAmount: BigNumber, receiver: string, owner: string) {
+  async withdraw(assetAmount: BigNumber, receiver: string, owner: string): Promise<void> {
     try {
       await this.contract.connect(this.signer).withdraw(assetAmount, receiver, owner)
     } catch (error) {
@@ -191,7 +192,7 @@ export class LendingPool {
     }
   }
 
-  async accountCollateralDeposited(account: string, collateral: string): Promise<[string, number, BigNumber]> {
+  async accountCollateralDeposited(account: string, collateral: string): Promise<ICollateralDeposited> {
     try {
       return await this.contract.accountCollateralDeposited(account, collateral)
     } catch (error) {
@@ -200,7 +201,7 @@ export class LendingPool {
     }
   }
 
-  async accountCollateralTokenIds(account: string, collateral: string): Promise<BigNumber> {
+  async accountCollateralTokenIds(account: string, collateral: string): Promise<{ tokenIds: BigNumber[] }> {
     try {
       return await this.contract.accountCollateralTokenIds(account, collateral)
     } catch (error) {
@@ -434,7 +435,7 @@ export class LendingPool {
     }
   }
 
-  async interestRates(): Promise<[BigNumber, BigNumber]> {
+  async interestRates(): Promise<IInterestRates> {
     try {
       return await this.contract.interestRates()
     } catch (error) {
@@ -506,6 +507,15 @@ export class LendingPool {
     }
   }
 
+  async poolAsset(): Promise<string> {
+    try {
+      return await this.contract.poolAsset()
+    } catch (error) {
+      console.error('Error in poolAsset:', error)
+      throw error
+    }
+  }
+
   async previewDeposit(assets: BigNumber): Promise<BigNumber> {
     try {
       return await this.contract.previewDeposit(assets)
@@ -533,7 +543,7 @@ export class LendingPool {
     }
   }
 
-  async previewWithdraw(assets: BigNumber) {
+  async previewWithdraw(assets: BigNumber): Promise<BigNumber> {
     try {
       return await this.contract.previewWithdraw(assets)
     } catch (error) {
