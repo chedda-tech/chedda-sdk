@@ -1,8 +1,7 @@
 import { BigNumber, ethers, Contract, Signer } from 'ethers'
-import ERC20 from './artifacts/ERC20.json'
 import MarketNFT from './artifacts/MarketNFT.json'
 
-export class TokenService {
+export class ERC721Token {
   public contract!: Contract
 
   constructor(
@@ -66,15 +65,6 @@ export class TokenService {
     }
   }
 
-  async ownedTokens(account: string): Promise<string[]> {
-    try {
-      return (await this.contract.ownedTokens(account)).map((t: any) => t.toString())
-    } catch (error) {
-      console.error('Error in ownedTokens:', error)
-      throw error
-    }
-  }
-
   async transfer(to: string, amount: BigNumber) {
     try {
       await this.contract.connect(this.signer).transfer(to, amount)
@@ -93,24 +83,15 @@ export class TokenService {
     }
   }
 
-  contractAt(address: string, isNFT: boolean = false) {
-    let abi: ethers.ContractInterface
-    if (isNFT) {
-      abi = MarketNFT.abi
-    } else {
-      abi = ERC20.abi
-    }
+  contractAt(address: string) {
+    let abi: ethers.ContractInterface = MarketNFT.abi
+
     const tokenContract = new ethers.Contract(address, abi, this.provider)
     this.contract = tokenContract
   }
 
-  initiateContract(isNFT: boolean = false) {
-    let abi: ethers.ContractInterface
-    if (isNFT) {
-      abi = MarketNFT.abi
-    } else {
-      abi = ERC20.abi
-    }
+  initiateContract() {
+    let abi: ethers.ContractInterface = MarketNFT.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')

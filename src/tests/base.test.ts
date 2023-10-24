@@ -1,18 +1,9 @@
 import { ethers, Signer } from 'ethers'
-import { Chedda } from './base'
-import { address, webSocketUrl } from './constants'
+import { Chedda } from '../base'
+import { mockAddress, webSocketUrl } from '../utils/constants'
 
 // Mock WebSocketProvider class
 jest.mock('ethers')
-
-// Mock CheddaVault class
-jest.mock('./vault')
-
-// Mock TokenService class
-jest.mock('./token')
-
-// Mock PriceOracle class
-jest.mock('./priceOracle')
 
 describe('Chedda', () => {
   let chedda: Chedda
@@ -35,17 +26,22 @@ describe('Chedda', () => {
   })
 
   it('should create a CheddaVault instance', () => {
-    const vault = chedda.vault(address, signer)
-    expect(vault).toBeDefined()
+    const lendingPool = chedda.lendingPool(mockAddress, signer)
+    expect(lendingPool).toBeDefined()
   })
 
-  it('should create a Token instance', () => {
-    const vault = chedda.token(address, signer)
-    expect(vault).toBeDefined()
+  it('should create an erc20Token instance', () => {
+    const erc20token = chedda.erc20token(mockAddress, signer)
+    expect(erc20token).toBeDefined()
+  })
+
+  it('should create a pool lens instance', () => {
+    const poolLens = chedda.poolLens(mockAddress, signer)
+    expect(poolLens).toBeDefined()
   })
 
   it('should create a PriceOracle instance', () => {
-    const vault = chedda.priceOracle()
-    expect(vault).toBeDefined()
+    const priceOracle = chedda.priceOracle()
+    expect(priceOracle).toBeDefined()
   })
 })
