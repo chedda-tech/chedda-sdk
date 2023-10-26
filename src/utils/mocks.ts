@@ -40,7 +40,6 @@ export const mockLendingPool: Partial<LendingPool> = {
   convertToAssets: jest.fn(),
   convertToShares: jest.fn(),
   debtToken: jest.fn(),
-  debtValue: jest.fn(),
   decimals: jest.fn(),
   feesPaid: jest.fn(),
   gauge: jest.fn(),

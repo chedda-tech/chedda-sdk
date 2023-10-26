@@ -109,7 +109,7 @@ describe('LendingPool', () => {
   it('should supply assets', async () => {
     const amount = BigNumber.from(100)
     const receiver = mockAddress
-    const useAsCollateral = mockAddress
+    const useAsCollateral = true
 
     await lendingPool.supply(amount, receiver, useAsCollateral)
     expect(mockLendingPool.supply).toHaveBeenCalledWith(amount, receiver, useAsCollateral)
@@ -290,11 +290,6 @@ describe('LendingPool', () => {
   it('should get debt token', async () => {
     await lendingPool.debtToken()
     expect(mockLendingPool.debtToken).toHaveBeenCalled()
-  })
-
-  it('should get debt value', async () => {
-    await lendingPool.debtValue()
-    expect(mockLendingPool.debtValue).toHaveBeenCalled()
   })
 
   it('should get decimals', async () => {
