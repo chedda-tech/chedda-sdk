@@ -118,7 +118,7 @@ export class LendingPool {
     }
   }
 
-  async supply(amount: BigNumber, receiver: string, useAsCollateral: string): Promise<void> {
+  async supply(amount: BigNumber, receiver: string, useAsCollateral: boolean): Promise<void> {
     try {
       await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
     } catch (error) {
@@ -368,15 +368,6 @@ export class LendingPool {
       return await this.contract.debtToken()
     } catch (error) {
       console.error('Error in debtToken:', error)
-      throw error
-    }
-  }
-
-  async debtValue(): Promise<BigNumber> {
-    try {
-      return await this.contract.debtValue()
-    } catch (error) {
-      console.error('Error in debtValue:', error)
       throw error
     }
   }
