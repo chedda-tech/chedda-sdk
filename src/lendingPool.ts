@@ -318,7 +318,7 @@ export class LendingPool {
     }
   }
 
-  async collateralTokenList(collateral: string): Promise<string> {
+  async collateralTokenList(collateral: string[]): Promise<string> {
     try {
       return await this.contract.collateralTokenList(collateral)
     } catch (error) {
@@ -331,14 +331,14 @@ export class LendingPool {
     try {
       return await this.contract.collateralTokenTypes(collateral)
     } catch (error) {
-      console.error('Error in collateralTokenList:', error)
+      console.error('Error in collateralTokenTypes:', error)
       throw error
     }
   }
 
-  async collaterals(collateral: string): Promise<string[]> {
+  async collaterals(): Promise<string[]> {
     try {
-      return await this.contract.collaterals(collateral)
+      return await this.contract.collaterals()
     } catch (error) {
       console.error('Error in collaterals:', error)
       throw error
