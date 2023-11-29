@@ -253,7 +253,7 @@ describe('LendingPool', () => {
   })
 
   it('should get collateral token list', async () => {
-    const collateral = mockAddress
+    const collateral = [...mockAddress]
 
     await lendingPool.collateralTokenList(collateral)
     expect(mockLendingPool.collateralTokenList).toHaveBeenCalledWith(collateral)
@@ -267,10 +267,8 @@ describe('LendingPool', () => {
   })
 
   it('should get collaterals', async () => {
-    const collateral = mockAddress
-
-    await lendingPool.collaterals(collateral)
-    expect(mockLendingPool.collaterals).toHaveBeenCalledWith(collateral)
+    await lendingPool.collaterals()
+    expect(mockLendingPool.collaterals).toHaveBeenCalledWith()
   })
 
   it('should convert shares to assets', async () => {
