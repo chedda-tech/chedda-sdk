@@ -1,6 +1,6 @@
 import { Contract, ethers, Signer } from 'ethers'
 import LendingPoolLens from './artifacts/LendingPoolLens.json'
-import { IAccountInfo, IAggregateStats, IPoolCollateralInfo, IPoolStats } from './utils/types'
+import { IAccountInfo, IAggregateStats, IMarketInfo, IPoolCollateralInfo, IPoolStats } from './utils/types'
 
 export class PoolLens {
   public contract!: Contract
@@ -35,6 +35,15 @@ export class PoolLens {
       return await this.contract.getAggregateStats()
     } catch (error) {
       this.handleContractError(error, 'getting aggregate stats')
+      throw error
+    }
+  }
+
+  async getMarketInfo(poolAddress: string): Promise<IMarketInfo> {
+    try {
+      return await this.contract.getMarketInfo(poolAddress)
+    } catch (error) {
+      this.handleContractError(error, 'getting market information')
       throw error
     }
   }

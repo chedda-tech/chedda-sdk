@@ -40,6 +40,13 @@ describe('PoolLens', () => {
     expect(mockPoolLens.getAggregateStats).toHaveBeenCalled()
   })
 
+  it('should get pool market information', async () => {
+    const poolAddress = mockAddress
+
+    await poolLens.getMarketInfo(poolAddress)
+    expect(mockPoolLens.getMarketInfo).toHaveBeenCalledWith(poolAddress)
+  })
+
   it('should get pool account information', async () => {
     const poolAddress = mockAddress
     const account = mockAddress

@@ -73,6 +73,7 @@ export const mockLendingPool: Partial<LendingPool> = {
 export const mockPoolLens: Partial<PoolLens> = {
   activePools: jest.fn(),
   getAggregateStats: jest.fn(),
+  getMarketInfo: jest.fn(),
   getPoolAccountInfo: jest.fn(),
   getPoolCollateral: jest.fn(),
   getPoolStats: jest.fn(),
