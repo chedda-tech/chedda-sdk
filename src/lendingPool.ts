@@ -268,7 +268,7 @@ export class LendingPool {
     try {
       return await this.contract.baseBorrowAPY()
     } catch (error) {
-      console.error('Error in balanceOf:', error)
+      console.error('Error in baseBorrowAPY:', error)
       throw error
     }
   }
