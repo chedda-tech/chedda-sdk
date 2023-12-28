@@ -450,4 +450,12 @@ describe('LendingPool', () => {
     await lendingPool.utilization()
     expect(mockLendingPool.utilization).toHaveBeenCalled()
   })
+
+  it('should get poolstate event', async () => {
+    const eventType = 'Transfer'
+    const fromBlock = 0
+    const ToBlock = 'latest'
+    await lendingPool.getEventLogs(eventType, fromBlock, ToBlock)
+    expect(mockLendingPool.getEventLogs).toHaveBeenCalledWith(eventType, fromBlock, ToBlock)
+  })
 })

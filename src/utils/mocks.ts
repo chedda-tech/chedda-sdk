@@ -68,6 +68,7 @@ export const mockLendingPool: Partial<LendingPool> = {
   totalSupply: jest.fn(),
   tvl: jest.fn(),
   utilization: jest.fn(),
+  getEventLogs: jest.fn(),
 }
 
 export const mockPoolLens: Partial<PoolLens> = {
