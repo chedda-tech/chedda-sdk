@@ -82,3 +82,12 @@ export interface IMarketInfo {
   liquidationThreshold: BigNumber
   liquidationPenalty: BigNumber
 }
+
+export interface IPoolState {
+  pool: string
+  timestamp: BigNumber
+  supplied: BigNumber
+  borrowed: BigNumber
+  supplyRate: BigNumber
+  borrowRate: BigNumber
+}

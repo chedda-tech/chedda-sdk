@@ -1,6 +1,6 @@
 import { BigNumber, Contract, ethers, Signer } from 'ethers'
-import LendingPoolArtifact from './artifacts/LendingPool.json'
 import { ICollateralDeposited, IInterestRates } from './utils/types'
+import LendingPoolArtifact from './artifacts/LendingPool.json'
 
 export class LendingPool {
   public contract!: Contract
@@ -620,6 +620,20 @@ export class LendingPool {
       return await this.contract.utilization()
     } catch (error) {
       console.error('Error in utilization:', error)
+      throw error
+    }
+  }
+
+  async getEventLogs<T>(
+    eventType: string,
+    fromBlock: string | number,
+    toBlock: string | number,
+  ): Promise<T[] | undefined> {
+    try {
+      const events = await this.contract.queryFilter(eventType, fromBlock, toBlock)
+      return events.map((event: any) => event.args)
+    } catch (error) {
+      console.error('Error in getEventLogs:', error)
       throw error
     }
   }
