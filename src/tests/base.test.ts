@@ -44,4 +44,9 @@ describe('Chedda', () => {
     const priceOracle = chedda.priceOracle()
     expect(priceOracle).toBeDefined()
   })
+
+  it('should create an interestRateProjector instance', () => {
+    const rateProjector = chedda.interestRateProjector(mockAddress, signer)
+    expect(rateProjector).toBeDefined()
+  })
 })

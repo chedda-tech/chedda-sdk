@@ -3,6 +3,7 @@ import { ERC20Token } from './erc20Token'
 import { LendingPool } from './lendingPool'
 import { PriceOracle } from './priceOracle'
 import { PoolLens } from './poolLens'
+import { InterestRatesProjector } from './interestRatesProjector'
 
 export class Chedda {
   provider: ethers.providers.WebSocketProvider
@@ -21,6 +22,10 @@ export class Chedda {
 
   poolLens(address: string, signer: Signer) {
     return new PoolLens(this.provider, address, signer)
+  }
+
+  interestRateProjector(address: string, signer: Signer) {
+    return new InterestRatesProjector(this.provider, address, signer)
   }
 
   priceOracle() {

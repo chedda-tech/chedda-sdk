@@ -417,9 +417,9 @@ export class LendingPool {
     }
   }
 
-  async interestRateModel(): Promise<string> {
+  async interestRatesModel(): Promise<string> {
     try {
-      return await this.contract.interestRates()
+      return await this.contract.interestRatesModel()
     } catch (error) {
       console.error('Error in interestRates:', error)
       throw error

@@ -91,3 +91,9 @@ export interface IPoolState {
   supplyRate: BigNumber
   borrowRate: BigNumber
 }
+
+export interface IInterestRatesProjection {
+  utilization: BigNumber
+  supplyRate: BigNumber
+  borrowRate: BigNumber
+}

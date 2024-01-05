@@ -322,8 +322,8 @@ describe('LendingPool', () => {
   })
 
   it('should get interest rate model', async () => {
-    await lendingPool.interestRateModel()
-    expect(mockLendingPool.interestRateModel).toHaveBeenCalled()
+    await lendingPool.interestRatesModel()
+    expect(mockLendingPool.interestRatesModel).toHaveBeenCalled()
   })
 
   it('should get interest rates', async () => {
