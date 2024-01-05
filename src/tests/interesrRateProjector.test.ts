@@ -15,7 +15,7 @@ jest.mock('../interestRatesProjector', () => {
   }
 })
 
-describe('PoolLens', () => {
+describe('Interest Rate Projector', () => {
   let ratesProjector: InterestRatesProjector
   let mockProvider: ethers.providers.WebSocketProvider
   let mockSigner: Signer
