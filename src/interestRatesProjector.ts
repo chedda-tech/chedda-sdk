@@ -21,7 +21,7 @@ export class InterestRatesProjector {
     this.contract = new ethers.Contract(this.address, InterestRatesProjectorArtifact.abi, this.provider)
   }
 
-  async projection(interestRatesModel: string, utilizations: BigNumber[]): Promise<IInterestRatesProjection> {
+  async projection(interestRatesModel: string, utilizations: BigNumber[]): Promise<IInterestRatesProjection[]> {
     try {
       return await this.contract.projection(interestRatesModel, utilizations)
     } catch (error) {
