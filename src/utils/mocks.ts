@@ -45,7 +45,7 @@ export const mockLendingPool: Partial<LendingPool> = {
   gauge: jest.fn(),
   getTokenCollateralValue: jest.fn(),
   getTokenMarketValue: jest.fn(),
-  interestRateModel: jest.fn(),
+  interestRatesModel: jest.fn(),
   interestRates: jest.fn(),
   maxDeposit: jest.fn(),
   maxMint: jest.fn(),
@@ -108,4 +108,8 @@ export const mockERC721Token = {
   ownedTokens: jest.fn(),
   transfer: jest.fn(),
   totalSupply: jest.fn(),
+}
+
+export const mockInterestRateProjector = {
+  projection: jest.fn(),
 }
