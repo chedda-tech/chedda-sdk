@@ -248,7 +248,7 @@ export class LendingPool {
 
   async available(): Promise<BigNumber> {
     try {
-      return await this.contract.assetBalance()
+      return await this.contract.available()
     } catch (error) {
       console.error('Error in assetBalance:', error)
       throw error
