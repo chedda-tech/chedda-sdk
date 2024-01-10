@@ -208,7 +208,7 @@ describe('LendingPool', () => {
   it('should get available', async () => {
     await lendingPool.available()
 
-    expect(mockLendingPool.assetBalance).toHaveBeenCalled()
+    expect(mockLendingPool.available).toHaveBeenCalled()
   })
 
   it('should get balance of', async () => {
