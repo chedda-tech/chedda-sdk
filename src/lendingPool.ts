@@ -36,16 +36,16 @@ export class LendingPool {
   // ERC20
   async approve(spender: string, amount: BigNumber): Promise<void> {
     try {
-      await this.contract.connect(this.signer).approve(spender, amount)
+      return await this.contract.connect(this.signer).approve(spender, amount)
     } catch (error) {
       console.error('Error in approve:', error)
       throw error
     }
   }
 
-  async depositAsset(assets: BigNumber, receiver: string): Promise<void> {
+  async depositAsset(assets: BigNumber, receiver: string): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).deposit(assets, receiver)
+      return await this.contract.connect(this.signer).deposit(assets, receiver)
     } catch (error) {
       console.error('Error in depositAsset:', error)
       throw error
@@ -54,7 +54,7 @@ export class LendingPool {
 
   async mintAsset(shares: BigNumber, receiver: string): Promise<void> {
     try {
-      await this.contract.connect(this.signer).mint(shares, receiver)
+      return await this.contract.connect(this.signer).mint(shares, receiver)
     } catch (error) {
       console.error('Error in mintAsset:', error)
       throw error
@@ -64,27 +64,27 @@ export class LendingPool {
   //Todo: Permit
   //Need explanation
 
-  async putAmount(amount: BigNumber): Promise<void> {
+  async putAmount(amount: BigNumber): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).putAmount(amount)
+      return await this.contract.connect(this.signer).putAmount(amount)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async putShares(shares: BigNumber): Promise<void> {
+  async putShares(shares: BigNumber): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).putShares(shares)
+      return await this.contract.connect(this.signer).putShares(shares)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async redeem(shares: BigNumber, receiver: string, owner: string): Promise<void> {
+  async redeem(shares: BigNumber, receiver: string, owner: string): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).redeem(shares, receiver, owner)
+      return await this.contract.connect(this.signer).redeem(shares, receiver, owner)
     } catch (error) {
       console.error('Error in redeem:', error)
       throw error
@@ -118,36 +118,36 @@ export class LendingPool {
     }
   }
 
-  async supply(amount: BigNumber, receiver: string, useAsCollateral: boolean): Promise<void> {
+  async supply(amount: BigNumber, receiver: string, useAsCollateral: boolean): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
+      return await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
     } catch (error) {
       console.error('Error in supply:', error)
       throw error
     }
   }
 
-  async take(amount: BigNumber): Promise<void> {
+  async take(amount: BigNumber): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).take(amount)
+      return await this.contract.connect(this.signer).take(amount)
     } catch (error) {
       console.error('Error in take:', error)
       throw error
     }
   }
 
-  async transfer(to: string, amount: BigNumber): Promise<void> {
+  async transfer(to: string, amount: BigNumber): Promise<boolean> {
     try {
-      await this.contract.connect(this.signer).transfer(to, amount)
+      return await this.contract.connect(this.signer).transfer(to, amount)
     } catch (error) {
       console.error('Error in transfer:', error)
       throw error
     }
   }
 
-  async transferFrom(from: string, to: string, amount: BigNumber): Promise<void> {
+  async transferFrom(from: string, to: string, amount: BigNumber): Promise<boolean> {
     try {
-      await this.contract.connect(this.signer).transferFrom(from, to, amount)
+      return await this.contract.connect(this.signer).transferFrom(from, to, amount)
     } catch (error) {
       console.error('Error in transferFrom:', error)
       throw error
@@ -163,9 +163,9 @@ export class LendingPool {
     }
   }
 
-  async withdraw(assetAmount: BigNumber, receiver: string, owner: string): Promise<void> {
+  async withdraw(assetAmount: BigNumber, receiver: string, owner: string): Promise<BigNumber> {
     try {
-      await this.contract.connect(this.signer).withdraw(assetAmount, receiver, owner)
+      return await this.contract.connect(this.signer).withdraw(assetAmount, receiver, owner)
     } catch (error) {
       console.error('Error in withdraw:', error)
       throw error
@@ -250,7 +250,7 @@ export class LendingPool {
     try {
       return await this.contract.available()
     } catch (error) {
-      console.error('Error in assetBalance:', error)
+      console.error('Error in available:', error)
       throw error
     }
   }

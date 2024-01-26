@@ -32,11 +32,7 @@ export class ERC20Token {
 
   async approve(spender: string, amount: BigNumber) {
     try {
-      if (this.contract.isNFT) {
-        await this.contract.connect(this.signer).setApprovalForAll(spender, amount)
-      } else {
-        await this.contract.connect(this.signer).approve(spender, amount)
-      }
+      return await this.contract.connect(this.signer).approve(spender, amount)
     } catch (error) {
       console.error('Error in approve:', error)
       throw error
@@ -76,7 +72,7 @@ export class ERC20Token {
 
   async transfer(to: string, amount: BigNumber) {
     try {
-      await this.contract.connect(this.signer).transfer(to, amount)
+      return await this.contract.connect(this.signer).transfer(to, amount)
     } catch (error) {
       console.error('Error in transfer:', error)
       throw error
