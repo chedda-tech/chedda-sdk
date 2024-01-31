@@ -1,25 +1,33 @@
-import { BigNumber, ethers, Contract } from "ethers";
+import { BigNumber, ethers, Contract } from 'ethers'
+import CheddaPriceFeed from './artifacts/CheddaPriceFeed.json'
 
 export class PriceOracle {
-  oracleContract: Contract | undefined;
-  provider: ethers.providers.WebSocketProvider;
+  public contract!: Contract
 
-  constructor(provider: ethers.providers.WebSocketProvider) {
-    this.provider = provider;
-    this.oracleContract = undefined;
+  constructor(
+    private provider: ethers.providers.WebSocketProvider,
+    private address: string,
+  ) {
+    this.initiateContract()
   }
 
-  async getAssetPrice(
-    address: string,
-    MultiAssetPriceOracle: { abi: ethers.ContractInterface },
-    priceFeedAddress: string
-  ): Promise<BigNumber> {
-    const priceFeedAbi = MultiAssetPriceOracle.abi;
-    this.oracleContract = new ethers.Contract(
-      priceFeedAddress,
-      priceFeedAbi,
-      this.provider
-    );
-    return await this.oracleContract.readPrice(address, 1);
+  private initiateContract() {
+    if (!this.address || !this.provider) {
+      throw new Error('Missing required data for contract initiation.')
+    }
+
+    this.contract = new ethers.Contract(this.address, CheddaPriceFeed.abi, this.provider)
+  }
+
+  async readPrice(address: string) {
+    return await this.contract.readPrice(address, '0')
+  }
+
+  async decimals(): Promise<BigNumber> {
+    return await this.contract.decimals()
+  }
+
+  async token(): Promise<string> {
+    return await this.contract.token()
   }
 }

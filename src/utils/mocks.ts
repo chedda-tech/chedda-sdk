@@ -1,5 +1,6 @@
 import { LendingPool } from '../lendingPool'
 import { PoolLens } from '../poolLens'
+import { PriceOracle } from '../priceOracle'
 
 export const mockLendingPool: Partial<LendingPool> = {
   addCollateral: jest.fn(),
@@ -112,4 +113,10 @@ export const mockERC721Token = {
 
 export const mockInterestRateProjector = {
   projection: jest.fn(),
+}
+
+export const mockPriceOracle: Partial<PriceOracle> = {
+  readPrice: jest.fn(),
+  decimals: jest.fn(),
+  token: jest.fn(),
 }
