@@ -41,7 +41,7 @@ describe('Chedda', () => {
   })
 
   it('should create a PriceOracle instance', () => {
-    const priceOracle = chedda.priceOracle()
+    const priceOracle = chedda.priceOracle(mockAddress)
     expect(priceOracle).toBeDefined()
   })
 

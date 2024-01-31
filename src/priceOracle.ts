@@ -19,15 +19,15 @@ export class PriceOracle {
     this.contract = new ethers.Contract(this.address, CheddaPriceFeed.abi, this.provider)
   }
 
-  async getAssetPrice(address: string) {
+  async readPrice(address: string) {
     return await this.contract.readPrice(address, '0')
   }
 
-  async getDecimals(): Promise<BigNumber> {
+  async decimals(): Promise<BigNumber> {
     return await this.contract.decimals()
   }
 
-  async getToken(): Promise<string> {
+  async token(): Promise<string> {
     return await this.contract.token()
   }
 }
