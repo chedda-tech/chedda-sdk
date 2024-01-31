@@ -28,8 +28,8 @@ export class Chedda {
     return new InterestRatesProjector(this.provider, address, signer)
   }
 
-  priceOracle() {
-    return new PriceOracle(this.provider)
+  priceOracle(address: string) {
+    return new PriceOracle(this.provider, address)
   }
 
   closeProvider() {
