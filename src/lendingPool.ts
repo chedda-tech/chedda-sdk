@@ -26,7 +26,7 @@ export class LendingPool {
 
   async addCollateral(token: string, amount: BigNumber): Promise<void> {
     try {
-      await this.contract.connect(this.signer).addCollateral(token, amount)
+      return await this.contract.connect(this.signer).addCollateral(token, amount)
     } catch (error) {
       console.error('Error in addCollateral:', error)
       throw error
@@ -93,7 +93,7 @@ export class LendingPool {
 
   async removeCollateral(token: string, amount: BigNumber): Promise<void> {
     try {
-      await this.contract.connect(this.signer).removeCollateral(token, amount)
+      return await this.contract.connect(this.signer).removeCollateral(token, amount)
     } catch (error) {
       console.error('Error in removeCollateral:', error)
       throw error
@@ -102,7 +102,7 @@ export class LendingPool {
 
   async renounceOwnerShip(): Promise<void> {
     try {
-      await this.contract.connect(this.signer).renounceOwnerShip()
+      return await this.contract.connect(this.signer).renounceOwnerShip()
     } catch (error) {
       console.error('Error in renounceOwnerShip:', error)
       throw error
@@ -111,7 +111,7 @@ export class LendingPool {
 
   async setGauge(_gauge: string): Promise<void> {
     try {
-      await this.contract.connect(this.signer).setGauge(_gauge)
+      return await this.contract.connect(this.signer).setGauge(_gauge)
     } catch (error) {
       console.error('Error in setGauge:', error)
       throw error
@@ -156,7 +156,7 @@ export class LendingPool {
 
   async transferOwnership(newOwner: string): Promise<void> {
     try {
-      await this.contract.connect(this.signer).transferOwnership(newOwner)
+      return await this.contract.connect(this.signer).transferOwnership(newOwner)
     } catch (error) {
       console.error('Error in transferOwnership:', error)
       throw error
