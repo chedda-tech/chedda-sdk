@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Contract } from 'ethers'
+import { ethers, Contract } from 'ethers'
 import CheddaPriceFeed from './artifacts/CheddaPriceFeed.json'
 
 export class PriceOracle {
@@ -23,7 +23,7 @@ export class PriceOracle {
     return await this.contract.readPrice(address, '0')
   }
 
-  async decimals(): Promise<BigNumber> {
+  async decimals(): Promise<number> {
     return await this.contract.decimals()
   }
 
