@@ -6,7 +6,7 @@ export class PoolLens {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.WebSocketProvider,
+    private provider: ethers.providers.JsonRpcProvider,
     private address: string,
     public signer: Signer,
   ) {

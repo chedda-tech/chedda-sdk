@@ -6,13 +6,13 @@ import { PoolLens } from './poolLens'
 import { InterestRatesProjector } from './interestRatesProjector'
 
 export class Chedda {
-  provider: ethers.providers.WebSocketProvider
+  provider: ethers.providers.JsonRpcProvider
   KEEP_ALIVE_CHECK_INTERVAL = 1000
   keepAliveInterval: any
   pingTimeout: any
 
   constructor(provider: string) {
-    this.provider = new ethers.providers.WebSocketProvider(provider)
+    this.provider = new ethers.providers.JsonRpcProvider(provider)
   }
 
   lendingPool(address: string, signer: Signer) {
@@ -33,52 +33,5 @@ export class Chedda {
 
   priceOracle(address: string) {
     return new PriceOracle(this.provider, address)
-  }
-
-  listenToEvents() {
-    this.provider._websocket.addEventListener('open', () => this.onWsOpen())
-    this.provider._websocket.addEventListener('close', () => this.onWsClose())
-  }
-
-  onWsOpen() {
-    console.log('Connected to the WS!')
-    this.keepAliveInterval = setInterval(() => {
-      if (
-        this.provider._websocket &&
-        (this.provider._websocket.readyState === WebSocket.OPEN ||
-          this.provider._websocket.readyState === WebSocket.CONNECTING)
-      )
-        return
-
-      this.provider._websocket?.close()
-    }, this.KEEP_ALIVE_CHECK_INTERVAL)
-  }
-
-  onWsClose() {
-    console.log('WS connection lost! Reconnecting...')
-    clearInterval(this.keepAliveInterval)
-    this.load()
-  }
-
-  async getBlockNumber() {
-    const blockNumber = await this.provider.getBlockNumber()
-    console.log('block number is: ', blockNumber)
-  }
-
-  getBalance() {
-    // Implement function to get balance
-  }
-
-  load() {
-    // Reload the WebSocketProvider
-    this.provider = new ethers.providers.WebSocketProvider(this.provider.connection.url)
-
-    // Re-set up event handlers for WebSocket events
-    this.provider._websocket.addEventListener('open', () => this.onWsOpen())
-    this.provider._websocket.addEventListener('close', () => this.onWsClose())
-  }
-
-  closeProvider() {
-    this.provider.destroy()
   }
 }

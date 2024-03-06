@@ -15,11 +15,6 @@ describe('Chedda', () => {
     signer = ethers.Wallet.createRandom()
   })
 
-  // Close the provider connection after all tests are completed
-  afterAll(async () => {
-    chedda.closeProvider()
-  })
-
   it('should create a Chedda instance', () => {
     expect(chedda).toBeInstanceOf(Chedda)
     expect(chedda.provider).toBeDefined()

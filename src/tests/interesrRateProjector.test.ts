@@ -17,7 +17,7 @@ jest.mock('../interestRatesProjector', () => {
 
 describe('Interest Rate Projector', () => {
   let ratesProjector: InterestRatesProjector
-  let mockProvider: ethers.providers.WebSocketProvider
+  let mockProvider: ethers.providers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {

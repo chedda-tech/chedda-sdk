@@ -17,7 +17,7 @@ jest.mock('../priceOracle', () => {
 
 describe('PoolLens', () => {
   let priceOracle: PriceOracle
-  let mockProvider: ethers.providers.WebSocketProvider
+  let mockProvider: ethers.providers.JsonRpcProvider
 
   beforeEach(() => {
     mockProvider = new ethers.providers.WebSocketProvider('webSocketUrl')

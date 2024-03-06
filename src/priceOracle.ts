@@ -5,7 +5,7 @@ export class PriceOracle {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.WebSocketProvider,
+    private provider: ethers.providers.JsonRpcProvider,
     private address: string,
   ) {
     this.initiateContract()
