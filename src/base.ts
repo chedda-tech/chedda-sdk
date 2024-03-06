@@ -11,8 +11,9 @@ export class Chedda {
   keepAliveInterval: any
   pingTimeout: any
 
-  constructor(provider: string) {
-    this.provider = new ethers.providers.WebSocketProvider(provider)
+  constructor(private providerUrl: string) {
+    this.provider = new ethers.providers.WebSocketProvider(this.providerUrl)
+    this.listenToEvents()
   }
 
   lendingPool(address: string, signer: Signer) {
@@ -60,18 +61,9 @@ export class Chedda {
     this.load()
   }
 
-  async getBlockNumber() {
-    const blockNumber = await this.provider.getBlockNumber()
-    console.log('block number is: ', blockNumber)
-  }
-
-  getBalance() {
-    // Implement function to get balance
-  }
-
   load() {
     // Reload the WebSocketProvider
-    this.provider = new ethers.providers.WebSocketProvider(this.provider.connection.url)
+    this.provider = new ethers.providers.WebSocketProvider(this.providerUrl)
 
     // Re-set up event handlers for WebSocket events
     this.provider._websocket.addEventListener('open', () => this.onWsOpen())
