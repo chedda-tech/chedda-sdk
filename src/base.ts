@@ -40,8 +40,6 @@ export class Chedda {
     if (this.provider._websocket && typeof WebSocket !== 'undefined') {
       this.provider._websocket.addEventListener('open', () => this.onWsOpen())
       this.provider._websocket.addEventListener('close', () => this.onWsClose())
-    } else {
-      console.warn('WebSocket not available. Events will not be listened to.')
     }
   }
 
