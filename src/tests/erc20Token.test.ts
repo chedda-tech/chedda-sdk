@@ -18,7 +18,7 @@ jest.mock('../erc20Token', () => {
 describe('Token', () => {
   let token: ERC20Token
   let signer: Signer
-  let provider: ethers.providers.WebSocketProvider
+  let provider: ethers.providers.JsonRpcProvider
 
   beforeEach(() => {
     jest.setTimeout(10000)

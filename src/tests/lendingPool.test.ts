@@ -17,7 +17,7 @@ jest.mock('../lendingPool', () => {
 
 describe('LendingPool', () => {
   let lendingPool: LendingPool
-  let mockProvider: ethers.providers.WebSocketProvider
+  let mockProvider: ethers.providers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {

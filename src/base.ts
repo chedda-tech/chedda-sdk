@@ -6,10 +6,10 @@ import { PoolLens } from './poolLens'
 import { InterestRatesProjector } from './interestRatesProjector'
 
 export class Chedda {
-  provider: ethers.providers.WebSocketProvider
+  provider: ethers.providers.JsonRpcProvider
 
   constructor(provider: string) {
-    this.provider = new ethers.providers.WebSocketProvider(provider)
+    this.provider = new ethers.providers.JsonRpcProvider(provider)
   }
 
   lendingPool(address: string, signer: Signer) {
@@ -30,9 +30,5 @@ export class Chedda {
 
   priceOracle(address: string) {
     return new PriceOracle(this.provider, address)
-  }
-
-  closeProvider() {
-    this.provider.destroy()
   }
 }

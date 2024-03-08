@@ -5,7 +5,7 @@ export class ERC721Token {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.WebSocketProvider,
+    private provider: ethers.providers.JsonRpcProvider,
     private address: string,
     private signer: Signer,
   ) {
