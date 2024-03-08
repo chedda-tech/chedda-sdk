@@ -7,9 +7,6 @@ import { InterestRatesProjector } from './interestRatesProjector'
 
 export class Chedda {
   provider: ethers.providers.JsonRpcProvider
-  KEEP_ALIVE_CHECK_INTERVAL = 1000
-  keepAliveInterval: any
-  pingTimeout: any
 
   constructor(provider: string) {
     this.provider = new ethers.providers.JsonRpcProvider(provider)
