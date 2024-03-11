@@ -79,6 +79,8 @@ export interface IMarketInfo {
   oraclePriceDecimals: BigNumber
   interestFee: BigNumber
   supplyCap: BigNumber
+  liquidity: BigNumber
+  utilization: BigNumber
   liquidationThreshold: BigNumber
   liquidationPenalty: BigNumber
 }
