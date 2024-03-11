@@ -55,6 +55,7 @@ export interface IAccountCollateralDeposited {
 }
 
 export interface IAccountInfo {
+  walletAssetBalance: BigNumber
   supplied: BigNumber
   borrowed: BigNumber
   decimals: number
