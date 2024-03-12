@@ -55,6 +55,7 @@ export interface IAccountCollateralDeposited {
 }
 
 export interface IAccountInfo {
+  walletAssetBalance: BigNumber
   supplied: BigNumber
   borrowed: BigNumber
   decimals: number
@@ -79,6 +80,8 @@ export interface IMarketInfo {
   oraclePriceDecimals: BigNumber
   interestFee: BigNumber
   supplyCap: BigNumber
+  liquidity: BigNumber
+  utilization: BigNumber
   liquidationThreshold: BigNumber
   liquidationPenalty: BigNumber
 }

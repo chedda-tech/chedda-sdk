@@ -30,9 +30,9 @@ export class PoolLens {
     }
   }
 
-  async getAggregateStats(): Promise<IAggregateStats> {
+  async getAggregateStats(onlyActive: boolean): Promise<IAggregateStats> {
     try {
-      return await this.contract.getAggregateStats()
+      return await this.contract.getAggregateStats(onlyActive)
     } catch (error) {
       this.handleContractError(error, 'getting aggregate stats')
       throw error

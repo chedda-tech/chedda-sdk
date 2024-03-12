@@ -36,7 +36,7 @@ describe('PoolLens', () => {
   })
 
   it('should get aggregate stats', async () => {
-    await poolLens.getAggregateStats()
+    await poolLens.getAggregateStats(true)
     expect(mockPoolLens.getAggregateStats).toHaveBeenCalled()
   })
 
