@@ -4,6 +4,7 @@ import { LendingPool } from './lendingPool'
 import { PriceOracle } from './priceOracle'
 import { PoolLens } from './poolLens'
 import { InterestRatesProjector } from './interestRatesProjector'
+import { StakingPool } from './stakingPool'
 
 export class Chedda {
   provider: ethers.providers.JsonRpcProvider
@@ -30,5 +31,9 @@ export class Chedda {
 
   priceOracle(address: string) {
     return new PriceOracle(this.provider, address)
+  }
+
+  stakingPool(address: string, signer: Signer) {
+    return new StakingPool(this.provider, address, signer)
   }
 }
