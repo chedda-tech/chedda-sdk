@@ -120,3 +120,12 @@ export const mockPriceOracle: Partial<PriceOracle> = {
   decimals: jest.fn(),
   token: jest.fn(),
 }
+
+export const mockStakingPool = {
+  stake: jest.fn(),
+  unStake: jest.fn(),
+  claim: jest.fn(),
+  claimable: jest.fn(),
+  stakingBalance: jest.fn(),
+  addRewards: jest.fn(),
+}

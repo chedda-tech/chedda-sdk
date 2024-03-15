@@ -44,4 +44,9 @@ describe('Chedda', () => {
     const rateProjector = chedda.interestRateProjector(mockAddress, signer)
     expect(rateProjector).toBeDefined()
   })
+
+  it('should create a stakingPool instance', () => {
+    const rateProjector = chedda.stakingPool(mockAddress, signer)
+    expect(rateProjector).toBeDefined()
+  })
 })

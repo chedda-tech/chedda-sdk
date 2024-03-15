@@ -637,4 +637,8 @@ export class LendingPool {
       throw error
     }
   }
+
+  async stakePool(): Promise<string> {
+    return await this.contract.stakePool()
+  }
 }
