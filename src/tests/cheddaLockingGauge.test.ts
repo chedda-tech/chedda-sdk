@@ -1,0 +1,99 @@
+import { BigNumber, ethers, Signer } from 'ethers'
+import { CheddaLockingGauge } from '../cheddaLockingGauge'
+import { mockAddress } from '../utils/constants'
+import { mockCheddaLockingGauge, mockPoolLens } from '../utils/mocks'
+
+jest.mock('ethers')
+
+jest.mock('../cheddaLockingGauge', () => {
+  return {
+    CheddaLockingGauge: jest.fn().mockImplementation(() => {
+      return {
+        ...mockCheddaLockingGauge,
+      }
+    }),
+  }
+})
+
+describe('CheddaLockGauge', () => {
+  let cheddaLockGauge: CheddaLockingGauge
+  let mockProvider: ethers.providers.JsonRpcProvider
+  let mockSigner: Signer
+
+  beforeEach(() => {
+    mockProvider = new ethers.providers.JsonRpcProvider('webSocketUrl')
+    mockSigner = ethers.Wallet.createRandom()
+    cheddaLockGauge = new CheddaLockingGauge(mockProvider, mockAddress, mockSigner)
+  })
+
+  it('should initiate the contract', () => {
+    expect(mockPoolLens.contract).not.toBeNull()
+  })
+
+  it('should create lock', async () => {
+    const amount = BigNumber.from(100)
+    await cheddaLockGauge.createLock(amount, 1)
+    expect(mockCheddaLockingGauge.createLock).toHaveBeenCalled()
+  })
+
+  it('should withdraw chedda', async () => {
+    await cheddaLockGauge.withdraw()
+    expect(mockCheddaLockingGauge.withdraw).toHaveBeenCalled()
+  })
+
+  it('should claim rewards', async () => {
+    await cheddaLockGauge.claim()
+    expect(mockCheddaLockingGauge.claim).toHaveBeenCalledWith()
+  })
+
+  it('should get claimable rewards', async () => {
+    const poolAddress = mockAddress
+
+    await cheddaLockGauge.claimable(poolAddress)
+    expect(mockCheddaLockingGauge.claimable).toHaveBeenCalledWith(poolAddress)
+  })
+
+  it('should get locked chedda', async () => {
+    const poolAddress = mockAddress
+
+    await cheddaLockGauge.getLock(poolAddress)
+    expect(mockCheddaLockingGauge.getLock).toHaveBeenCalledWith(poolAddress)
+  })
+
+  it('should add rewards', async () => {
+    const amount = BigNumber.from(100)
+
+    await cheddaLockGauge.addRewards(amount)
+    expect(mockCheddaLockingGauge.addRewards).toHaveBeenCalledWith(amount)
+  })
+
+  it('should get rewardPerShare', async () => {
+    await cheddaLockGauge.rewardPerShare()
+    expect(mockCheddaLockingGauge.rewardPerShare).toHaveBeenCalledWith()
+  })
+
+  it('should get totalLocked', async () => {
+    await cheddaLockGauge.totalLocked()
+    expect(mockCheddaLockingGauge.totalLocked).toHaveBeenCalledWith()
+  })
+
+  it('should get token', async () => {
+    await cheddaLockGauge.token()
+    expect(mockCheddaLockingGauge.token).toHaveBeenCalledWith()
+  })
+
+  it('should get totalRewards', async () => {
+    await cheddaLockGauge.totalClaimed()
+    expect(mockCheddaLockingGauge.totalClaimed).toHaveBeenCalledWith()
+  })
+
+  it('should add weight', async () => {
+    await cheddaLockGauge.weight()
+    expect(mockCheddaLockingGauge.weight).toHaveBeenCalledWith()
+  })
+
+  it('should get numberOfLocks', async () => {
+    await cheddaLockGauge.numberOfLocks()
+    expect(mockCheddaLockingGauge.numberOfLocks).toHaveBeenCalledWith()
+  })
+})

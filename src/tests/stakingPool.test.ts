@@ -15,7 +15,7 @@ jest.mock('../stakingPool', () => {
   }
 })
 
-describe('PoolLens', () => {
+describe('StakingPool', () => {
   let stakingPool: StakingPool
   let mockProvider: ethers.providers.JsonRpcProvider
   let mockSigner: Signer

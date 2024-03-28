@@ -129,3 +129,31 @@ export const mockStakingPool = {
   stakingBalance: jest.fn(),
   addRewards: jest.fn(),
 }
+
+export const mockCheddaLockingGauge = {
+  createLock: jest.fn(),
+  withdraw: jest.fn(),
+  getLock: jest.fn(),
+  claim: jest.fn(),
+  claimable: jest.fn(),
+  addRewards: jest.fn(),
+  token: jest.fn(),
+  rewardPerShare: jest.fn(),
+  totalLocked: jest.fn(),
+  totalClaimed: jest.fn(),
+  totalRewards: jest.fn(),
+  weight: jest.fn(),
+  numberOfLocks: jest.fn(),
+}
+
+export const mockLockingGaugeRewardsDistributor = {
+  registerPool: jest.fn(),
+  unregisterPool: jest.fn(),
+  distribute: jest.fn(),
+  weightTotal: jest.fn(),
+  token: jest.fn(),
+  pools: jest.fn(),
+  Konstant: jest.fn(),
+  lockingPortion: jest.fn(),
+  stakingPortion: jest.fn(),
+}
