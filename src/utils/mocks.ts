@@ -141,6 +141,7 @@ export const mockCheddaLockingGauge = {
   addRewards: jest.fn(),
   token: jest.fn(),
   rewardPerShare: jest.fn(),
+  totalWeight: jest.fn(),
   totalLocked: jest.fn(),
   totalClaimed: jest.fn(),
   totalRewards: jest.fn(),

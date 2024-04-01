@@ -111,6 +111,15 @@ export class CheddaLockingGauge {
     }
   }
 
+  async totalWeight(): Promise<BigNumber> {
+    try {
+      return await this.contract.totalWeight()
+    } catch (error) {
+      console.error('Error in totalWeight:', error)
+      throw error
+    }
+  }
+
   async totalLocked(): Promise<BigNumber> {
     try {
       return await this.contract.totalLocked()

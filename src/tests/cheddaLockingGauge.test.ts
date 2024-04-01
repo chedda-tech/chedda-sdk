@@ -83,6 +83,11 @@ describe('CheddaLockGauge', () => {
     expect(mockCheddaLockingGauge.rewardPerShare).toHaveBeenCalledWith()
   })
 
+  it('should get totalWeight', async () => {
+    await cheddaLockGauge.totalWeight()
+    expect(mockCheddaLockingGauge.totalWeight).toHaveBeenCalledWith()
+  })
+
   it('should get totalLocked', async () => {
     await cheddaLockGauge.totalLocked()
     expect(mockCheddaLockingGauge.totalLocked).toHaveBeenCalledWith()
