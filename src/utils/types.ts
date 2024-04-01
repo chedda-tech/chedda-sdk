@@ -102,6 +102,7 @@ export interface IInterestRatesProjection {
 }
 
 export enum LockTime {
+  zero,
   thirtyDays,
   ninetyDays,
   oneEightyDays,
