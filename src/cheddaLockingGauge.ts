@@ -21,6 +21,24 @@ export class CheddaLockingGauge {
     this.contract = new ethers.Contract(this.address, CheddaLockingGaugeArtifact.abi, this.provider)
   }
 
+  async extendLock(time: LockTime): Promise<BigNumber> {
+    try {
+      return await this.contract.connect(this.signer).extendLock(time)
+    } catch (error) {
+      console.error('Error in extendLock:', error)
+      throw error
+    }
+  }
+
+  async addToLock(amount: BigNumber): Promise<BigNumber> {
+    try {
+      return await this.contract.connect(this.signer).addToLock(amount)
+    } catch (error) {
+      console.error('Error in addToLock:', error)
+      throw error
+    }
+  }
+
   async createLock(amount: BigNumber, time: LockTime): Promise<BigNumber> {
     try {
       return await this.contract.connect(this.signer).createLock(amount, time)

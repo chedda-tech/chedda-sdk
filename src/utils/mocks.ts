@@ -131,6 +131,8 @@ export const mockStakingPool = {
 }
 
 export const mockCheddaLockingGauge = {
+  addToLock: jest.fn(),
+  extendLock: jest.fn(),
   createLock: jest.fn(),
   withdraw: jest.fn(),
   getLock: jest.fn(),

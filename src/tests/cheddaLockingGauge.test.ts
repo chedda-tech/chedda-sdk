@@ -30,6 +30,17 @@ describe('CheddaLockGauge', () => {
     expect(mockPoolLens.contract).not.toBeNull()
   })
 
+  it('should add to lock', async () => {
+    const amount = BigNumber.from(100)
+    await cheddaLockGauge.addToLock(amount)
+    expect(mockCheddaLockingGauge.addToLock).toHaveBeenCalled()
+  })
+
+  it('should extend lock', async () => {
+    await cheddaLockGauge.extendLock(1)
+    expect(mockCheddaLockingGauge.extendLock).toHaveBeenCalled()
+  })
+
   it('should create lock', async () => {
     const amount = BigNumber.from(100)
     await cheddaLockGauge.createLock(amount, 1)
