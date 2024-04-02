@@ -100,3 +100,19 @@ export interface IInterestRatesProjection {
   supplyRate: BigNumber
   borrowRate: BigNumber
 }
+
+export enum LockTime {
+  zero,
+  thirtyDays,
+  ninetyDays,
+  oneEightyDays,
+  threeSixtyDays,
+}
+
+export interface Lock {
+  amount: BigNumber
+  timeWeighted: BigNumber
+  expiry: BigNumber
+  rewardDebt: BigNumber
+  lockTime: LockTime
+}

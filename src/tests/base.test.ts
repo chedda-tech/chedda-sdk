@@ -46,7 +46,22 @@ describe('Chedda', () => {
   })
 
   it('should create a stakingPool instance', () => {
-    const rateProjector = chedda.stakingPool(mockAddress, signer)
-    expect(rateProjector).toBeDefined()
+    const stakingPool = chedda.stakingPool(mockAddress, signer)
+    expect(stakingPool).toBeDefined()
+  })
+
+  it('should create a cheddaLockingGauge instance', () => {
+    const cheddaLockingGauge = chedda.cheddaLockingGauge(mockAddress, signer)
+    expect(cheddaLockingGauge).toBeDefined()
+  })
+
+  it('should create a lockingGaugeRewardsDistributor instance', () => {
+    const lockingGaugeRewardsDistributor = chedda.lockingGaugeRewardsDistributor(mockAddress, signer)
+    expect(lockingGaugeRewardsDistributor).toBeDefined()
+  })
+
+  it('should create a cheddaToken instance', () => {
+    const cheddaToken = chedda.cheddaToken(mockAddress, signer)
+    expect(cheddaToken).toBeDefined()
   })
 })

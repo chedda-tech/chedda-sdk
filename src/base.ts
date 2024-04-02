@@ -5,6 +5,9 @@ import { PriceOracle } from './priceOracle'
 import { PoolLens } from './poolLens'
 import { InterestRatesProjector } from './interestRatesProjector'
 import { StakingPool } from './stakingPool'
+import { CheddaLockingGauge } from './cheddaLockingGauge'
+import { LockingGaugeRewardsDistributor } from './lockingGaugeRewardsDistributor'
+import { CheddaToken } from './cheddaToken'
 
 export class Chedda {
   provider: ethers.providers.JsonRpcProvider
@@ -35,5 +38,17 @@ export class Chedda {
 
   stakingPool(address: string, signer: Signer) {
     return new StakingPool(this.provider, address, signer)
+  }
+
+  cheddaLockingGauge(address: string, signer: Signer) {
+    return new CheddaLockingGauge(this.provider, address, signer)
+  }
+
+  lockingGaugeRewardsDistributor(address: string, signer: Signer) {
+    return new LockingGaugeRewardsDistributor(this.provider, address, signer)
+  }
+
+  cheddaToken(address: string, signer: Signer) {
+    return new CheddaToken(this.provider, address, signer)
   }
 }

@@ -639,6 +639,6 @@ export class LendingPool {
   }
 
   async stakePool(): Promise<string> {
-    return await this.contract.stakePool()
+    return await this.contract.stakingPool()
   }
 }
