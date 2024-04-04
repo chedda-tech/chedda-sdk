@@ -153,7 +153,7 @@ export const mockLockingGaugeRewardsDistributor = {
   registerPool: jest.fn(),
   unregisterPool: jest.fn(),
   distribute: jest.fn(),
-  weightTotal: jest.fn(),
+  totalWeightSum: jest.fn(),
   token: jest.fn(),
   pools: jest.fn(),
   Konstant: jest.fn(),

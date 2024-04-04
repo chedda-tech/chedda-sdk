@@ -47,11 +47,11 @@ export class LockingGaugeRewardsDistributor {
     }
   }
 
-  async weightTotal(): Promise<BigNumber> {
+  async totalWeightSum(): Promise<BigNumber> {
     try {
-      return await this.contract.weightTotal()
+      return await this.contract.totalWeightSum()
     } catch (error) {
-      console.error('Error in weightTotal:', error)
+      console.error('Error in totalWeightSum:', error)
       throw error
     }
   }
