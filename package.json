@@ -1,6 +1,6 @@
 {
   "name": "chedda-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SDK for interacting with the Chedda platform's smart contracts and services.",
   "publishConfig": {
     "access": "public"
