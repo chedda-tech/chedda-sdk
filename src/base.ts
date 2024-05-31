@@ -8,6 +8,9 @@ import { StakingPool } from './stakingPool'
 import { CheddaLockingGauge } from './cheddaLockingGauge'
 import { LockingGaugeRewardsDistributor } from './lockingGaugeRewardsDistributor'
 import { CheddaToken } from './cheddaToken'
+import { GenericOFT } from './genericOFT'
+import { CheddaOFTAdapter } from './cheddaOFTAdapter'
+import { CheddaTokenBridged } from './cheddaTokenBridged'
 
 export class Chedda {
   provider: ethers.providers.JsonRpcProvider
@@ -50,5 +53,17 @@ export class Chedda {
 
   cheddaToken(address: string, signer: Signer) {
     return new CheddaToken(this.provider, address, signer)
+  }
+
+  cheddaTokenBridged(address: string, signer: Signer) {
+    return new CheddaTokenBridged(this.provider, address, signer)
+  }
+
+  genericOFT(address: string, signer: Signer) {
+    return new GenericOFT(this.provider, address, signer)
+  }
+
+  cheddaOFTAdapter(address: string, signer: Signer) {
+    return new CheddaOFTAdapter(this.provider, address, signer)
   }
 }
