@@ -121,4 +121,4 @@ export interface INativeFee {
   nativeFee: BigNumber
 }
 
-export type SendParam = [number, string, BigNumber, BigNumber, string, string]
+export type SendParam = (string | number | BigNumber | Uint8Array)[]
