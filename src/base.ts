@@ -16,7 +16,7 @@ export class Chedda {
   provider: ethers.providers.JsonRpcProvider
 
   constructor(provider: string) {
-    this.provider = new ethers.providers.JsonRpcProvider(provider)
+    this.provider = new ethers.providers.JsonRpcProvider(provider, 'any')
   }
 
   lendingPool(address: string, signer: Signer) {
