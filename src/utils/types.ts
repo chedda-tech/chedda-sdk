@@ -116,3 +116,9 @@ export interface Lock {
   rewardDebt: BigNumber
   lockTime: LockTime
 }
+
+export interface INativeFee {
+  nativeFee: BigNumber
+}
+
+export type SendParam = (string | number | BigNumber | Uint8Array)[]

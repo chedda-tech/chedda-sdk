@@ -1,8 +1,8 @@
 import { BigNumber, ethers, Contract, Signer } from 'ethers'
-import CheddaTokenArtifact from './artifacts/CheddaToken.json'
+import CheddaOFTAdapterArtifact from './artifacts/CheddaOFTAdapter.json'
 import { SendParam } from './utils/types'
 
-export class CheddaToken {
+export class CheddaOFTAdapter {
   public contract!: Contract
 
   constructor(
@@ -119,7 +119,7 @@ export class CheddaToken {
   }
 
   initiateContract() {
-    let abi: ethers.ContractInterface = CheddaTokenArtifact.abi
+    let abi: ethers.ContractInterface = CheddaOFTAdapterArtifact.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')

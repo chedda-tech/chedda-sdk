@@ -64,4 +64,19 @@ describe('Chedda', () => {
     const cheddaToken = chedda.cheddaToken(mockAddress, signer)
     expect(cheddaToken).toBeDefined()
   })
+
+  it('should create a cheddaTokenBridged instance', () => {
+    const cheddaTokenBridged = chedda.cheddaTokenBridged(mockAddress, signer)
+    expect(cheddaTokenBridged).toBeDefined()
+  })
+
+  it('should create a cheddaOFTAdapter instance', () => {
+    const cheddaOFTAdapter = chedda.cheddaOFTAdapter(mockAddress, signer)
+    expect(cheddaOFTAdapter).toBeDefined()
+  })
+
+  it('should create a genericOFT instance', () => {
+    const genericOFT = chedda.genericOFT(mockAddress, signer)
+    expect(genericOFT).toBeDefined()
+  })
 })
