@@ -30,13 +30,13 @@ describe('AccountActor', () => {
     expect(mockPoolLens.contract).not.toBeNull()
   })
 
-  it('should stake asset', async () => {
+  it('should return account summary', async () => {
     const account = '0x00'
     await accountActor.accountSummary(account)
     expect(mockAccountActor.accountSummary).toHaveBeenCalledWith(account)
   })
 
-  it('should unstake asset', async () => {
+  it('should return claimable rewards', async () => {
     const account = '0x00'
     await accountActor.allClaimableRewards(account)
     expect(mockAccountActor.allClaimableRewards).toHaveBeenCalledWith(account)
@@ -48,13 +48,13 @@ describe('AccountActor', () => {
     expect(mockAccountActor.claimAllRewards).toHaveBeenCalledWith(account)
   })
 
-  it('should get claimable rewards', async () => {
+  it('should get all positions', async () => {
     const account = '0x00'
     await accountActor.allPositions(account, true)
     expect(mockAccountActor.allPositions).toHaveBeenCalledWith(account, true)
   })
 
-  it('should get staking balance', async () => {
+  it('should get single position by pool', async () => {
     const poolAddress = mockAddress
     const account = '0x00'
 
