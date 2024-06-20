@@ -160,3 +160,11 @@ export const mockLockingGaugeRewardsDistributor = {
   lockingPortion: jest.fn(),
   stakingPortion: jest.fn(),
 }
+
+export const mockAccountActor = {
+  accountSummary: jest.fn(),
+  allClaimableRewards: jest.fn(),
+  claimAllRewards: jest.fn(),
+  allPositions: jest.fn(),
+  getPosition: jest.fn(),
+}

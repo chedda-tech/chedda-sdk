@@ -122,3 +122,33 @@ export interface INativeFee {
 }
 
 export type SendParam = (string | number | BigNumber | Uint8Array)[]
+
+export interface IAccountSummary {
+  netValue: BigNumber
+  suppliedValue: BigNumber
+  borrowedValue: BigNumber
+  lockedValue: BigNumber
+}
+
+export interface IClaimableRewards {
+  reward1: BigNumber
+  reward2: BigNumber
+}
+
+export interface IPosition {
+  account: string
+  pool: string
+  asset: string
+  decimals: number
+  supplied: BigNumber
+  borrowed: BigNumber
+  suppliedValue: BigNumber
+  borrowedValue: BigNumber
+  collateralValue: BigNumber
+  healthFactor: BigNumber
+  staked: BigNumber
+  locked: BigNumber
+  stakeRewardsClaimable: BigNumber
+  lockRewardsClaimable: BigNumber
+  exposure: BigNumber
+}
