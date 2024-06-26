@@ -11,6 +11,7 @@ import { CheddaToken } from './cheddaToken'
 import { GenericOFT } from './genericOFT'
 import { CheddaOFTAdapter } from './cheddaOFTAdapter'
 import { CheddaTokenBridged } from './cheddaTokenBridged'
+import { AccountActor } from './accountActor'
 
 export class Chedda {
   provider: ethers.providers.JsonRpcProvider
@@ -65,5 +66,9 @@ export class Chedda {
 
   cheddaOFTAdapter(address: string, signer: Signer) {
     return new CheddaOFTAdapter(this.provider, address, signer)
+  }
+
+  accountActor(address: string, signer: Signer) {
+    return new AccountActor(this.provider, address, signer)
   }
 }

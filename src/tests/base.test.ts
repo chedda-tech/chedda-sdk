@@ -79,4 +79,9 @@ describe('Chedda', () => {
     const genericOFT = chedda.genericOFT(mockAddress, signer)
     expect(genericOFT).toBeDefined()
   })
+
+  it('should create a accountActor instance', () => {
+    const accountActor = chedda.accountActor(mockAddress, signer)
+    expect(accountActor).toBeDefined()
+  })
 })
