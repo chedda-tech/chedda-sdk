@@ -22,6 +22,7 @@ export interface IPoolStats {
   feesPaid: BigNumber
   tvl: BigNumber
   collaterals: string[]
+  dailyRewards: BigNumber
 }
 
 export interface IAggregateStats {
@@ -151,5 +152,4 @@ export interface IPosition {
   stakeRewardsClaimable: BigNumber
   lockRewardsClaimable: BigNumber
   exposure: BigNumber
-  dailyRewards: BigNumber
 }
