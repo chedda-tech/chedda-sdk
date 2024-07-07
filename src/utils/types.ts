@@ -151,4 +151,5 @@ export interface IPosition {
   stakeRewardsClaimable: BigNumber
   lockRewardsClaimable: BigNumber
   exposure: BigNumber
+  dailyRewards: BigNumber
 }
