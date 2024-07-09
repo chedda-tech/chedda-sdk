@@ -22,6 +22,8 @@ export interface IPoolStats {
   feesPaid: BigNumber
   tvl: BigNumber
   collaterals: string[]
+  dailyRewards: BigNumber
+  rewardsAPY: BigNumber
 }
 
 export interface IAggregateStats {
