@@ -14,10 +14,10 @@ import { CheddaTokenBridged } from './cheddaTokenBridged'
 import { AccountActor } from './accountActor'
 
 export class Chedda {
-  provider: ethers.providers.JsonRpcProvider
+  provider: ethers.JsonRpcProvider
 
   constructor(provider: string) {
-    this.provider = new ethers.providers.JsonRpcProvider(provider, 'any')
+    this.provider = new ethers.JsonRpcProvider(provider, 'any')
   }
 
   lendingPool(address: string, signer: Signer) {

@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Signer } from 'ethers'
+import { ethers, Signer } from 'ethers'
 import { StakingPool } from '../stakingPool'
 import { mockAddress } from '../utils/constants'
 import { mockPoolLens, mockStakingPool } from '../utils/mocks'
@@ -17,11 +17,11 @@ jest.mock('../stakingPool', () => {
 
 describe('StakingPool', () => {
   let stakingPool: StakingPool
-  let mockProvider: ethers.providers.JsonRpcProvider
+  let mockProvider: ethers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.WebSocketProvider('webSocketUrl')
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
     mockSigner = ethers.Wallet.createRandom()
     stakingPool = new StakingPool(mockProvider, mockAddress, mockSigner)
   })
@@ -31,13 +31,13 @@ describe('StakingPool', () => {
   })
 
   it('should stake asset', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
     await stakingPool.stake(amount)
     expect(mockStakingPool.stake).toHaveBeenCalled()
   })
 
   it('should unstake asset', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
     await stakingPool.unStake(amount)
     expect(mockStakingPool.unStake).toHaveBeenCalled()
   })
@@ -62,7 +62,7 @@ describe('StakingPool', () => {
   })
 
   it('should add rewards', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await stakingPool.addRewards(amount)
     expect(mockStakingPool.addRewards).toHaveBeenCalledWith(amount)

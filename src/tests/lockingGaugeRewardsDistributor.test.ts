@@ -17,11 +17,11 @@ jest.mock('../lockingGaugeRewardsDistributor', () => {
 
 describe('CheddaLockGauge', () => {
   let lockingGaugeRewardsDistributor: LockingGaugeRewardsDistributor
-  let mockProvider: ethers.providers.JsonRpcProvider
+  let mockProvider: ethers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.JsonRpcProvider('webSocketUrl')
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
     mockSigner = ethers.Wallet.createRandom()
     lockingGaugeRewardsDistributor = new LockingGaugeRewardsDistributor(mockProvider, mockAddress, mockSigner)
   })

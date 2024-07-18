@@ -1,15 +1,15 @@
-import { BigNumber, ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, Signer } from 'ethers'
 import MarketNFT from './artifacts/MarketNFT.json'
 
 export class ERC721Token {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     private signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
   async name(): Promise<string> {
@@ -30,12 +30,12 @@ export class ERC721Token {
     }
   }
 
-  async approve(spender: string, amount: BigNumber) {
+  async approve(spender: string, amount: bigint) {
     try {
       if (this.contract.isNFT) {
-        await this.contract.connect(this.signer).setApprovalForAll(spender, amount)
+        await this.contract.connect(this.signer).getFunction('setApprovalForAll')(spender, amount)
       } else {
-        await this.contract.connect(this.signer).approve(spender, amount)
+        await this.contract.connect(this.signer).getFunction('approve')(spender, amount)
       }
     } catch (error) {
       console.error('Error in approve:', error)
@@ -43,7 +43,7 @@ export class ERC721Token {
     }
   }
 
-  async allowance(account: string, spender: string): Promise<BigNumber> {
+  async allowance(account: string, spender: string): Promise<bigint> {
     try {
       if (this.contract.isNFT) {
         return await this.contract.isApprovedForAll(account, spender)
@@ -56,7 +56,7 @@ export class ERC721Token {
     }
   }
 
-  async balanceOf(account: string): Promise<BigNumber> {
+  async balanceOf(account: string): Promise<bigint> {
     try {
       return await this.contract.balanceOf(account)
     } catch (error) {
@@ -65,16 +65,16 @@ export class ERC721Token {
     }
   }
 
-  async transfer(to: string, amount: BigNumber) {
+  async transfer(to: string, amount: bigint) {
     try {
-      await this.contract.connect(this.signer).transfer(to, amount)
+      await this.contract.connect(this.signer).getFunction('transfer')(to, amount)
     } catch (error) {
       console.error('Error in transfer:', error)
       throw error
     }
   }
 
-  async totalSupply(): Promise<BigNumber> {
+  async totalSupply(): Promise<bigint> {
     try {
       return await this.contract.totalSupply()
     } catch (error) {
@@ -84,14 +84,14 @@ export class ERC721Token {
   }
 
   contractAt(address: string) {
-    let abi: ethers.ContractInterface = MarketNFT.abi
+    let abi: ethers.InterfaceAbi = MarketNFT.abi
 
     const tokenContract = new ethers.Contract(address, abi, this.provider)
     this.contract = tokenContract
   }
 
-  initiateContract() {
-    let abi: ethers.ContractInterface = MarketNFT.abi
+  initializeContract() {
+    let abi: ethers.InterfaceAbi = MarketNFT.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')

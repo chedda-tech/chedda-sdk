@@ -1,4 +1,4 @@
-import { BigNumber, Contract, ethers, Signer } from 'ethers'
+import { Contract, ContractTransactionResponse, ethers, Signer } from 'ethers'
 import { ICollateralDeposited, IInterestRates } from './utils/types'
 import LendingPoolArtifact from './artifacts/LendingPool.json'
 
@@ -6,17 +6,17 @@ export class LendingPool {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     private signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
   /**
    * Initializes the contract instance.
    */
-  private initiateContract() {
+  private initializeContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
     }
@@ -24,9 +24,9 @@ export class LendingPool {
     this.contract = new ethers.Contract(this.address, LendingPoolArtifact.abi, this.provider)
   }
 
-  async addCollateral(token: string, amount: BigNumber): Promise<void> {
+  async addCollateral(token: string, amount: bigint): Promise<ContractTransactionResponse> {
     try {
-      return await this.contract.connect(this.signer).addCollateral(token, amount)
+      return await this.contract.connect(this.signer).getFunction('addCollateral')(token, amount)
     } catch (error) {
       console.error('Error in addCollateral:', error)
       throw error
@@ -34,27 +34,27 @@ export class LendingPool {
   }
 
   // ERC20
-  async approve(spender: string, amount: BigNumber): Promise<void> {
+  async approve(spender: string, amount: bigint): Promise<ContractTransactionResponse> {
     try {
-      return await this.contract.connect(this.signer).approve(spender, amount)
+      return await this.contract.connect(this.signer).getFunction('approve')(spender, amount)
     } catch (error) {
       console.error('Error in approve:', error)
       throw error
     }
   }
 
-  async depositAsset(assets: BigNumber, receiver: string): Promise<BigNumber> {
+  async depositAsset(assets: bigint, receiver: string): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).deposit(assets, receiver)
+      return await this.contract.connect(this.signer).getFunction('deposit')(assets, receiver)
     } catch (error) {
       console.error('Error in depositAsset:', error)
       throw error
     }
   }
 
-  async mintAsset(shares: BigNumber, receiver: string): Promise<void> {
+  async mintAsset(shares: bigint, receiver: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).mint(shares, receiver)
+      return await this.contract.connect(this.signer).getFunction('mint')(shares, receiver)
     } catch (error) {
       console.error('Error in mintAsset:', error)
       throw error
@@ -64,36 +64,36 @@ export class LendingPool {
   //Todo: Permit
   //Need explanation
 
-  async putAmount(amount: BigNumber): Promise<BigNumber> {
+  async putAmount(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).putAmount(amount)
+      return await this.contract.connect(this.signer).getFunction('putAmount')(amount)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async putShares(shares: BigNumber): Promise<BigNumber> {
+  async putShares(shares: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).putShares(shares)
+      return await this.contract.connect(this.signer).getFunction('putShares')(shares)
     } catch (error) {
       console.error('Error in putAmount:', error)
       throw error
     }
   }
 
-  async redeem(shares: BigNumber, receiver: string, owner: string): Promise<BigNumber> {
+  async redeem(shares: bigint, receiver: string, owner: string): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).redeem(shares, receiver, owner)
+      return await this.contract.connect(this.signer).getFunction('redeem')(shares, receiver, owner)
     } catch (error) {
       console.error('Error in redeem:', error)
       throw error
     }
   }
 
-  async removeCollateral(token: string, amount: BigNumber): Promise<void> {
+  async removeCollateral(token: string, amount: bigint): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).removeCollateral(token, amount)
+      return await this.contract.connect(this.signer).getFunction('removeCollateral')(token, amount)
     } catch (error) {
       console.error('Error in removeCollateral:', error)
       throw error
@@ -102,7 +102,7 @@ export class LendingPool {
 
   async renounceOwnerShip(): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).renounceOwnerShip()
+      return await this.contract.connect(this.signer).getFunction('renounceOwnerShip')()
     } catch (error) {
       console.error('Error in renounceOwnerShip:', error)
       throw error
@@ -111,43 +111,43 @@ export class LendingPool {
 
   async setGauge(_gauge: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).setGauge(_gauge)
+      return await this.contract.connect(this.signer).getFunction('setGauge')(_gauge)
     } catch (error) {
       console.error('Error in setGauge:', error)
       throw error
     }
   }
 
-  async supply(amount: BigNumber, receiver: string, useAsCollateral: boolean): Promise<BigNumber> {
+  async supply(amount: bigint, receiver: string, useAsCollateral: boolean): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).supply(amount, receiver, useAsCollateral)
+      return await this.contract.connect(this.signer).getFunction('supply')(amount, receiver, useAsCollateral)
     } catch (error) {
       console.error('Error in supply:', error)
       throw error
     }
   }
 
-  async take(amount: BigNumber): Promise<BigNumber> {
+  async take(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).take(amount)
+      return await this.contract.connect(this.signer).getFunction('take')(amount)
     } catch (error) {
       console.error('Error in take:', error)
       throw error
     }
   }
 
-  async transfer(to: string, amount: BigNumber): Promise<boolean> {
+  async transfer(to: string, amount: bigint): Promise<boolean> {
     try {
-      return await this.contract.connect(this.signer).transfer(to, amount)
+      return await this.contract.connect(this.signer).getFunction('transfer')(to, amount)
     } catch (error) {
       console.error('Error in transfer:', error)
       throw error
     }
   }
 
-  async transferFrom(from: string, to: string, amount: BigNumber): Promise<boolean> {
+  async transferFrom(from: string, to: string, amount: bigint): Promise<boolean> {
     try {
-      return await this.contract.connect(this.signer).transferFrom(from, to, amount)
+      return await this.contract.connect(this.signer).getFunction('transferFrom')(from, to, amount)
     } catch (error) {
       console.error('Error in transferFrom:', error)
       throw error
@@ -156,16 +156,16 @@ export class LendingPool {
 
   async transferOwnership(newOwner: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).transferOwnership(newOwner)
+      return await this.contract.connect(this.signer).getFunction('transferOwnership')(newOwner)
     } catch (error) {
       console.error('Error in transferOwnership:', error)
       throw error
     }
   }
 
-  async withdraw(assetAmount: BigNumber, receiver: string, owner: string): Promise<BigNumber> {
+  async withdraw(assetAmount: bigint, receiver: string, owner: string): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).withdraw(assetAmount, receiver, owner)
+      return await this.contract.connect(this.signer).getFunction('withdraw')(assetAmount, receiver, owner)
     } catch (error) {
       console.error('Error in withdraw:', error)
       throw error
@@ -174,7 +174,7 @@ export class LendingPool {
 
   //Read contract ---------------------------------------------
 
-  async accountAssetsBorrowed(account: string): Promise<BigNumber> {
+  async accountAssetsBorrowed(account: string): Promise<bigint> {
     try {
       return await this.contract.accountAssetsBorrowed(account)
     } catch (error) {
@@ -183,7 +183,7 @@ export class LendingPool {
     }
   }
 
-  async accountCollateralAmount(account: string, collateral: string): Promise<BigNumber> {
+  async accountCollateralAmount(account: string, collateral: string): Promise<bigint> {
     try {
       return await this.contract.accountCollateralAmount(account, collateral)
     } catch (error) {
@@ -201,7 +201,7 @@ export class LendingPool {
     }
   }
 
-  async accountCollateralTokenIds(account: string, collateral: string): Promise<{ tokenIds: BigNumber[] }> {
+  async accountCollateralTokenIds(account: string, collateral: string): Promise<{ tokenIds: bigint[] }> {
     try {
       return await this.contract.accountCollateralTokenIds(account, collateral)
     } catch (error) {
@@ -210,7 +210,7 @@ export class LendingPool {
     }
   }
 
-  async accountHealth(account: string): Promise<BigNumber> {
+  async accountHealth(account: string): Promise<bigint> {
     try {
       return await this.contract.accountHealth(account)
     } catch (error) {
@@ -219,7 +219,7 @@ export class LendingPool {
     }
   }
 
-  async allowance(account: string, spender: string): Promise<BigNumber> {
+  async allowance(account: string, spender: string): Promise<bigint> {
     try {
       return await this.contract.allowance(account, spender)
     } catch (error) {
@@ -237,7 +237,7 @@ export class LendingPool {
     }
   }
 
-  async assetBalance(account: string): Promise<BigNumber> {
+  async assetBalance(account: string): Promise<bigint> {
     try {
       return await this.contract.assetBalance(account)
     } catch (error) {
@@ -246,7 +246,7 @@ export class LendingPool {
     }
   }
 
-  async available(): Promise<BigNumber> {
+  async available(): Promise<bigint> {
     try {
       return await this.contract.available()
     } catch (error) {
@@ -255,7 +255,7 @@ export class LendingPool {
     }
   }
 
-  async balanceOf(account: string): Promise<BigNumber> {
+  async balanceOf(account: string): Promise<bigint> {
     try {
       return await this.contract.balanceOf(account)
     } catch (error) {
@@ -264,7 +264,7 @@ export class LendingPool {
     }
   }
 
-  async baseBorrowAPY(): Promise<BigNumber> {
+  async baseBorrowAPY(): Promise<bigint> {
     try {
       return await this.contract.baseBorrowAPY()
     } catch (error) {
@@ -273,7 +273,7 @@ export class LendingPool {
     }
   }
 
-  async baseSupplyAPY(): Promise<BigNumber> {
+  async baseSupplyAPY(): Promise<bigint> {
     try {
       return await this.contract.baseSupplyAPY()
     } catch (error) {
@@ -282,7 +282,7 @@ export class LendingPool {
     }
   }
 
-  async borrowed(): Promise<BigNumber> {
+  async borrowed(): Promise<bigint> {
     try {
       return await this.contract.borrowed()
     } catch (error) {
@@ -309,7 +309,7 @@ export class LendingPool {
     }
   }
 
-  async collateralFactor(collateral: string): Promise<BigNumber> {
+  async collateralFactor(collateral: string): Promise<bigint> {
     try {
       return await this.contract.collateralFactor(collateral)
     } catch (error) {
@@ -345,7 +345,7 @@ export class LendingPool {
     }
   }
 
-  async convertToAssets(shares: BigNumber): Promise<BigNumber> {
+  async convertToAssets(shares: bigint): Promise<bigint> {
     try {
       return await this.contract.convertToAssets(shares)
     } catch (error) {
@@ -354,7 +354,7 @@ export class LendingPool {
     }
   }
 
-  async convertToShares(assets: BigNumber): Promise<BigNumber> {
+  async convertToShares(assets: bigint): Promise<bigint> {
     try {
       return await this.contract.convertToShares(assets)
     } catch (error) {
@@ -381,7 +381,7 @@ export class LendingPool {
     }
   }
 
-  async feesPaid(): Promise<BigNumber> {
+  async feesPaid(): Promise<bigint> {
     try {
       return await this.contract.feesPaid()
     } catch (error) {
@@ -399,7 +399,7 @@ export class LendingPool {
     }
   }
 
-  async getTokenCollateralValue(token: string, amount: BigNumber): Promise<BigNumber> {
+  async getTokenCollateralValue(token: string, amount: bigint): Promise<bigint> {
     try {
       return await this.contract.getTokenCollateralValue(token, amount)
     } catch (error) {
@@ -408,7 +408,7 @@ export class LendingPool {
     }
   }
 
-  async getTokenMarketValue(token: string, amount: BigNumber): Promise<BigNumber> {
+  async getTokenMarketValue(token: string, amount: bigint): Promise<bigint> {
     try {
       return await this.contract.getTokenMarketValue(token, amount)
     } catch (error) {
@@ -435,7 +435,7 @@ export class LendingPool {
     }
   }
 
-  async maxDeposit(amount: BigNumber): Promise<BigNumber> {
+  async maxDeposit(amount: bigint): Promise<bigint> {
     try {
       return await this.contract.maxDeposit(amount)
     } catch (error) {
@@ -444,7 +444,7 @@ export class LendingPool {
     }
   }
 
-  async maxMint(amount: BigNumber): Promise<BigNumber> {
+  async maxMint(amount: bigint): Promise<bigint> {
     try {
       return await this.contract.maxMint(amount)
     } catch (error) {
@@ -453,7 +453,7 @@ export class LendingPool {
     }
   }
 
-  async maxRedeem(owner: string): Promise<BigNumber> {
+  async maxRedeem(owner: string): Promise<bigint> {
     try {
       return await this.contract.maxRedeem(owner)
     } catch (error) {
@@ -462,7 +462,7 @@ export class LendingPool {
     }
   }
 
-  async maxWithdraw(owner: string): Promise<BigNumber> {
+  async maxWithdraw(owner: string): Promise<bigint> {
     try {
       return await this.contract.maxWithdraw(owner)
     } catch (error) {
@@ -480,7 +480,7 @@ export class LendingPool {
     }
   }
 
-  async owner(): Promise<BigNumber> {
+  async owner(): Promise<bigint> {
     try {
       return await this.contract.owner()
     } catch (error) {
@@ -489,7 +489,7 @@ export class LendingPool {
     }
   }
 
-  async nonces(address: string): Promise<BigNumber> {
+  async nonces(address: string): Promise<bigint> {
     try {
       return await this.contract.nonces(address)
     } catch (error) {
@@ -507,7 +507,7 @@ export class LendingPool {
     }
   }
 
-  async previewDeposit(assets: BigNumber): Promise<BigNumber> {
+  async previewDeposit(assets: bigint): Promise<bigint> {
     try {
       return await this.contract.previewDeposit(assets)
     } catch (error) {
@@ -516,7 +516,7 @@ export class LendingPool {
     }
   }
 
-  async previewMint(shares: BigNumber): Promise<BigNumber> {
+  async previewMint(shares: bigint): Promise<bigint> {
     try {
       return await this.contract.previewMint(shares)
     } catch (error) {
@@ -525,7 +525,7 @@ export class LendingPool {
     }
   }
 
-  async previewRedeem(shares: BigNumber): Promise<BigNumber> {
+  async previewRedeem(shares: bigint): Promise<bigint> {
     try {
       return await this.contract.previewRedeem(shares)
     } catch (error) {
@@ -534,7 +534,7 @@ export class LendingPool {
     }
   }
 
-  async previewWithdraw(assets: BigNumber): Promise<BigNumber> {
+  async previewWithdraw(assets: bigint): Promise<bigint> {
     try {
       return await this.contract.previewWithdraw(assets)
     } catch (error) {
@@ -552,7 +552,7 @@ export class LendingPool {
     }
   }
 
-  async supplied(): Promise<BigNumber> {
+  async supplied(): Promise<bigint> {
     try {
       return await this.contract.supplied()
     } catch (error) {
@@ -570,7 +570,7 @@ export class LendingPool {
     }
   }
 
-  async tokenCollateralDeposited(collateral: string): Promise<BigNumber> {
+  async tokenCollateralDeposited(collateral: string): Promise<bigint> {
     try {
       return await this.contract.tokenCollateralDeposited(collateral)
     } catch (error) {
@@ -579,7 +579,7 @@ export class LendingPool {
     }
   }
 
-  async totalAccountCollateralValue(account: string): Promise<BigNumber> {
+  async totalAccountCollateralValue(account: string): Promise<bigint> {
     try {
       return await this.contract.totalAccountCollateralValue(account)
     } catch (error) {
@@ -588,7 +588,7 @@ export class LendingPool {
     }
   }
 
-  async totalAssets(): Promise<BigNumber> {
+  async totalAssets(): Promise<bigint> {
     try {
       return await this.contract.totalAssets()
     } catch (error) {
@@ -597,7 +597,7 @@ export class LendingPool {
     }
   }
 
-  async totalSupply(): Promise<BigNumber> {
+  async totalSupply(): Promise<bigint> {
     try {
       return await this.contract.totalSupply()
     } catch (error) {
@@ -606,7 +606,7 @@ export class LendingPool {
     }
   }
 
-  async tvl(): Promise<BigNumber> {
+  async tvl(): Promise<bigint> {
     try {
       return await this.contract.tvl()
     } catch (error) {
@@ -615,7 +615,7 @@ export class LendingPool {
     }
   }
 
-  async utilization(): Promise<BigNumber> {
+  async utilization(): Promise<bigint> {
     try {
       return await this.contract.utilization()
     } catch (error) {

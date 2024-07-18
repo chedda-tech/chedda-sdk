@@ -1,7 +1,7 @@
 import { ethers, Signer } from 'ethers'
 import { AccountActor } from '../accountActor'
 import { mockAddress } from '../utils/constants'
-import { mockPoolLens, mockAccountActor } from '../utils/mocks'
+import { mockAccountActor } from '../utils/mocks'
 
 jest.mock('ethers')
 
@@ -17,17 +17,17 @@ jest.mock('../accountActor', () => {
 
 describe('AccountActor', () => {
   let accountActor: AccountActor
-  let mockProvider: ethers.providers.JsonRpcProvider
+  let mockProvider: ethers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.WebSocketProvider('webSocketUrl')
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
     mockSigner = ethers.Wallet.createRandom()
     accountActor = new AccountActor(mockProvider, mockAddress, mockSigner)
   })
 
   it('should initiate the contract', () => {
-    expect(mockPoolLens.contract).not.toBeNull()
+    expect(mockAccountActor.contract).not.toBeNull()
   })
 
   it('should return account summary', async () => {

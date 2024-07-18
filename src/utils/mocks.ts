@@ -1,6 +1,10 @@
+import { AccountActor } from '../accountActor'
+import { CheddaLockingGauge } from '../cheddaLockingGauge'
 import { LendingPool } from '../lendingPool'
+import { LockingGaugeRewardsDistributor } from '../lockingGaugeRewardsDistributor'
 import { PoolLens } from '../poolLens'
 import { PriceOracle } from '../priceOracle'
+import { StakingPool } from '../stakingPool'
 
 export const mockLendingPool: Partial<LendingPool> = {
   addCollateral: jest.fn(),
@@ -82,11 +86,6 @@ export const mockPoolLens: Partial<PoolLens> = {
   getPoolStatsList: jest.fn(),
   owner: jest.fn(),
   registeredPools: jest.fn(),
-  registerPool: jest.fn(),
-  renounceOwnership: jest.fn(),
-  setActive: jest.fn(),
-  transferOwnership: jest.fn(),
-  unregisterPool: jest.fn(),
 }
 
 export const mockERC20Token = {
@@ -121,7 +120,7 @@ export const mockPriceOracle: Partial<PriceOracle> = {
   token: jest.fn(),
 }
 
-export const mockStakingPool = {
+export const mockStakingPool: Partial<StakingPool> = {
   stake: jest.fn(),
   unStake: jest.fn(),
   claim: jest.fn(),
@@ -130,7 +129,7 @@ export const mockStakingPool = {
   addRewards: jest.fn(),
 }
 
-export const mockCheddaLockingGauge = {
+export const mockCheddaLockingGauge: Partial<CheddaLockingGauge> = {
   addToLock: jest.fn(),
   extendLock: jest.fn(),
   createLock: jest.fn(),
@@ -149,7 +148,7 @@ export const mockCheddaLockingGauge = {
   numberOfLocks: jest.fn(),
 }
 
-export const mockLockingGaugeRewardsDistributor = {
+export const mockLockingGaugeRewardsDistributor: Partial<LockingGaugeRewardsDistributor> = {
   registerPool: jest.fn(),
   unregisterPool: jest.fn(),
   distribute: jest.fn(),
@@ -161,7 +160,7 @@ export const mockLockingGaugeRewardsDistributor = {
   stakingPortion: jest.fn(),
 }
 
-export const mockAccountActor = {
+export const mockAccountActor: Partial<AccountActor> = {
   accountSummary: jest.fn(),
   allClaimableRewards: jest.fn(),
   claimAllRewards: jest.fn(),

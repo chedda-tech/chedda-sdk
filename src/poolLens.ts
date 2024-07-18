@@ -6,14 +6,14 @@ export class PoolLens {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     public signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
-  private initiateContract() {
+  private initializeContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
     }
@@ -95,52 +95,7 @@ export class PoolLens {
 
   async registeredPools(): Promise<string[]> {
     try {
-      return await this.contract.connect(this.signer).registeredPools()
-    } catch (error) {
-      this.handleContractError(error, 'getting registered pool')
-      throw error
-    }
-  }
-
-  async registerPool(pool: string, isActive: boolean): Promise<void> {
-    try {
-      await this.contract.connect(this.signer).registerPool(pool, isActive)
-    } catch (error) {
-      this.handleContractError(error, 'getting registered pool')
-      throw error
-    }
-  }
-
-  async renounceOwnership(): Promise<void> {
-    try {
-      await this.contract.connect(this.signer).renounceOwnership()
-    } catch (error) {
-      this.handleContractError(error, 'getting registered pool')
-      throw error
-    }
-  }
-
-  async setActive(pool: string, isActive: boolean): Promise<void> {
-    try {
-      await this.contract.connect(this.signer).setActive(pool, isActive)
-    } catch (error) {
-      this.handleContractError(error, 'getting registered pool')
-      throw error
-    }
-  }
-
-  async transferOwnership(newOwner: string): Promise<void> {
-    try {
-      await this.contract.connect(this.signer).transferOwnership(newOwner)
-    } catch (error) {
-      this.handleContractError(error, 'getting registered pool')
-      throw error
-    }
-  }
-
-  async unregisterPool(pool: string): Promise<void> {
-    try {
-      await this.contract.connect(this.signer).unregisterPool(pool)
+      return await this.contract.registeredPools()
     } catch (error) {
       this.handleContractError(error, 'getting registered pool')
       throw error

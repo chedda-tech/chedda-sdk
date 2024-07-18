@@ -1,4 +1,4 @@
-import { BigNumber, Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, Signer } from 'ethers'
 import CheddaLockingGaugeArtifact from './artifacts/CheddaLockingGauge.json'
 import { Lock, LockTime } from './utils/types'
 
@@ -6,14 +6,14 @@ export class CheddaLockingGauge {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     public signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
-  private initiateContract() {
+  private initializeContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
     }
@@ -21,36 +21,36 @@ export class CheddaLockingGauge {
     this.contract = new ethers.Contract(this.address, CheddaLockingGaugeArtifact.abi, this.provider)
   }
 
-  async extendLock(time: LockTime): Promise<BigNumber> {
+  async extendLock(time: LockTime): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).extendLock(time)
+      return await this.contract.connect(this.signer).getFunction('extendLock')(time)
     } catch (error) {
       console.error('Error in extendLock:', error)
       throw error
     }
   }
 
-  async addToLock(amount: BigNumber): Promise<BigNumber> {
+  async addToLock(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).addToLock(amount)
+      return await this.contract.connect(this.signer).getFunction('addToLock')(amount)
     } catch (error) {
       console.error('Error in addToLock:', error)
       throw error
     }
   }
 
-  async createLock(amount: BigNumber, time: LockTime): Promise<BigNumber> {
+  async createLock(amount: bigint, time: LockTime): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).createLock(amount, time)
+      return await this.contract.connect(this.signer).getFunction('createLock')(amount, time)
     } catch (error) {
       console.error('Error in createLock:', error)
       throw error
     }
   }
 
-  async withdraw(): Promise<BigNumber> {
+  async withdraw(): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).withdraw()
+      return await this.contract.connect(this.signer).getFunction('withdraw')()
     } catch (error) {
       console.error('Error in withdraw:', error)
       throw error
@@ -59,23 +59,23 @@ export class CheddaLockingGauge {
 
   async getLock(address: string): Promise<Lock> {
     try {
-      return await this.contract.connect(this.signer).getLock(address)
+      return await this.contract.connect(this.signer).getFunction('getLock')(address)
     } catch (error) {
       console.error('Error in getLock:', error)
       throw error
     }
   }
 
-  async claim(): Promise<BigNumber> {
+  async claim(): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).claim()
+      return await this.contract.connect(this.signer).getFunction('claim')()
     } catch (error) {
       console.error('Error in claim:', error)
       throw error
     }
   }
 
-  async claimable(account: string): Promise<BigNumber> {
+  async claimable(account: string): Promise<bigint> {
     try {
       return await this.contract.claimable(account)
     } catch (error) {
@@ -84,9 +84,9 @@ export class CheddaLockingGauge {
     }
   }
 
-  async addRewards(amount: BigNumber): Promise<BigNumber> {
+  async addRewards(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).addRewards(amount)
+      return await this.contract.connect(this.signer).getFunction('addRewards')(amount)
     } catch (error) {
       console.error('Error in addRewards:', error)
       throw error
@@ -102,7 +102,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async rewardPerShare(): Promise<BigNumber> {
+  async rewardPerShare(): Promise<bigint> {
     try {
       return await this.contract.rewardPerShare()
     } catch (error) {
@@ -111,7 +111,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async totalWeight(): Promise<BigNumber> {
+  async totalWeight(): Promise<bigint> {
     try {
       return await this.contract.totalWeight()
     } catch (error) {
@@ -120,7 +120,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async totalLocked(): Promise<BigNumber> {
+  async totalLocked(): Promise<bigint> {
     try {
       return await this.contract.totalLocked()
     } catch (error) {
@@ -129,7 +129,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async totalClaimed(): Promise<BigNumber> {
+  async totalClaimed(): Promise<bigint> {
     try {
       return await this.contract.totalClaimed()
     } catch (error) {
@@ -138,7 +138,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async totalRewards(): Promise<BigNumber> {
+  async totalRewards(): Promise<bigint> {
     try {
       return await this.contract.totalRewards()
     } catch (error) {
@@ -147,7 +147,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async weight(): Promise<BigNumber> {
+  async weight(): Promise<bigint> {
     try {
       return await this.contract.weight()
     } catch (error) {
@@ -156,7 +156,7 @@ export class CheddaLockingGauge {
     }
   }
 
-  async numberOfLocks(): Promise<BigNumber> {
+  async numberOfLocks(): Promise<bigint> {
     try {
       return await this.contract.numberOfLocks()
     } catch (error) {

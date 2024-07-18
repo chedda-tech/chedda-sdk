@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, Signer } from 'ethers'
 import GenericOFTArtifact from './artifacts/GenericOFT.json'
 import { SendParam } from './utils/types'
 
@@ -6,11 +6,11 @@ export class GenericOFT {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     private signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
   async name(): Promise<string> {
@@ -31,16 +31,16 @@ export class GenericOFT {
     }
   }
 
-  async approve(spender: string, amount: BigNumber) {
+  async approve(spender: string, amount: bigint) {
     try {
-      return await this.contract.connect(this.signer).approve(spender, amount)
+      return await this.contract.connect(this.signer).getFunction('approve')(spender, amount)
     } catch (error) {
       console.error('Error in approve:', error)
       throw error
     }
   }
 
-  async allowance(account: string, spender: string): Promise<BigNumber> {
+  async allowance(account: string, spender: string): Promise<bigint> {
     try {
       if (this.contract.isNFT) {
         return await this.contract.isApprovedForAll(account, spender)
@@ -53,7 +53,7 @@ export class GenericOFT {
     }
   }
 
-  async balanceOf(account: string): Promise<BigNumber> {
+  async balanceOf(account: string): Promise<bigint> {
     try {
       return await this.contract.balanceOf(account)
     } catch (error) {
@@ -71,16 +71,16 @@ export class GenericOFT {
     }
   }
 
-  async transfer(to: string, amount: BigNumber) {
+  async transfer(to: string, amount: bigint) {
     try {
-      return await this.contract.connect(this.signer).transfer(to, amount)
+      return await this.contract.connect(this.signer).getFunction('transfer')(to, amount)
     } catch (error) {
       console.error('Error in transfer:', error)
       throw error
     }
   }
 
-  async totalSupply(): Promise<BigNumber> {
+  async totalSupply(): Promise<bigint> {
     try {
       return await this.contract.totalSupply()
     } catch (error) {
@@ -107,19 +107,19 @@ export class GenericOFT {
     }
   }
 
-  async send(sendParam: SendParam, nativeFee: BigNumber, refundAddress: string) {
+  async send(sendParam: SendParam, nativeFee: bigint, refundAddress: string) {
     try {
-      return await this.contract
-        .connect(this.signer)
-        .send(sendParam, [nativeFee, 0], refundAddress, { value: nativeFee })
+      return await this.contract.connect(this.signer).getFunction('send')(sendParam, [nativeFee, 0], refundAddress, {
+        value: nativeFee,
+      })
     } catch (error) {
       console.error('Error in send:', error)
       throw error
     }
   }
 
-  initiateContract() {
-    let abi: ethers.ContractInterface = GenericOFTArtifact.abi
+  initializeContract() {
+    let abi: ethers.InterfaceAbi = GenericOFTArtifact.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')

@@ -1,4 +1,4 @@
-import { ethers, Signer, BigNumber } from 'ethers'
+import { ethers, Signer } from 'ethers'
 import { LendingPool } from '../lendingPool'
 import { mockAddress, webSocketUrl } from '../utils/constants'
 import { mockLendingPool } from '../utils/mocks'
@@ -17,11 +17,11 @@ jest.mock('../lendingPool', () => {
 
 describe('LendingPool', () => {
   let lendingPool: LendingPool
-  let mockProvider: ethers.providers.JsonRpcProvider
+  let mockProvider: ethers.JsonRpcProvider
   let mockSigner: Signer
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.WebSocketProvider(webSocketUrl)
+    mockProvider = new ethers.JsonRpcProvider(webSocketUrl)
     mockSigner = ethers.Wallet.createRandom()
     lendingPool = new LendingPool(mockProvider, mockAddress, mockSigner)
   })
@@ -32,7 +32,7 @@ describe('LendingPool', () => {
 
   it('should add collateral', async () => {
     const token = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.addCollateral(token, amount)
     expect(mockLendingPool.addCollateral).toHaveBeenCalledWith(token, amount)
@@ -40,14 +40,14 @@ describe('LendingPool', () => {
 
   it('should approve', async () => {
     const spender = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.approve(spender, amount)
     expect(mockLendingPool.approve).toHaveBeenCalledWith(spender, amount)
   })
 
   it('should deposit assets', async () => {
-    const assets = BigNumber.from(100)
+    const assets = BigInt(100)
     const receiver = mockAddress
 
     await lendingPool.depositAsset(assets, receiver)
@@ -55,7 +55,7 @@ describe('LendingPool', () => {
   })
 
   it('should mint assets', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
     const receiver = mockAddress
 
     await lendingPool.mintAsset(shares, receiver)
@@ -63,7 +63,7 @@ describe('LendingPool', () => {
   })
 
   it('should put amount', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.putAmount(amount)
 
@@ -71,14 +71,14 @@ describe('LendingPool', () => {
   })
 
   it('should put shares', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
 
     await lendingPool.putShares(shares)
     expect(mockLendingPool.putShares).toHaveBeenCalledWith(shares)
   })
 
   it('should redeem assets', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
     const receiver = mockAddress
     const owner = mockAddress
 
@@ -88,7 +88,7 @@ describe('LendingPool', () => {
 
   it('should remove collateral', async () => {
     const token = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.removeCollateral(token, amount)
     expect(mockLendingPool.removeCollateral).toHaveBeenCalledWith(token, amount)
@@ -107,7 +107,7 @@ describe('LendingPool', () => {
   })
 
   it('should supply assets', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
     const receiver = mockAddress
     const useAsCollateral = true
 
@@ -116,7 +116,7 @@ describe('LendingPool', () => {
   })
 
   it('should take assets', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.take(amount)
 
@@ -125,7 +125,7 @@ describe('LendingPool', () => {
 
   it('should transfer assets', async () => {
     const to = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.transfer(to, amount)
     expect(mockLendingPool.transfer).toHaveBeenCalledWith(to, amount)
@@ -134,7 +134,7 @@ describe('LendingPool', () => {
   it('should transfer from', async () => {
     const from = mockAddress
     const to = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.transferFrom(from, to, amount)
     expect(mockLendingPool.transferFrom).toHaveBeenCalledWith(from, to, amount)
@@ -272,14 +272,14 @@ describe('LendingPool', () => {
   })
 
   it('should convert shares to assets', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
 
     await lendingPool.convertToAssets(shares)
     expect(mockLendingPool.convertToAssets).toHaveBeenCalledWith(shares)
   })
 
   it('should convert assets to shares', async () => {
-    const assets = BigNumber.from(100)
+    const assets = BigInt(100)
 
     await lendingPool.convertToShares(assets)
     expect(mockLendingPool.convertToShares).toHaveBeenCalledWith(assets)
@@ -307,7 +307,7 @@ describe('LendingPool', () => {
 
   it('should get token collateral value', async () => {
     const token = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.getTokenCollateralValue(token, amount)
     expect(mockLendingPool.getTokenCollateralValue).toHaveBeenCalledWith(token, amount)
@@ -315,7 +315,7 @@ describe('LendingPool', () => {
 
   it('should get token market value', async () => {
     const token = mockAddress
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.getTokenMarketValue(token, amount)
     expect(mockLendingPool.getTokenMarketValue).toHaveBeenCalledWith(token, amount)
@@ -332,14 +332,14 @@ describe('LendingPool', () => {
   })
 
   it('should get max deposit', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.maxDeposit(amount)
     expect(mockLendingPool.maxDeposit).toHaveBeenCalledWith(amount)
   })
 
   it('should get max mint', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await lendingPool.maxMint(amount)
     expect(mockLendingPool.maxMint).toHaveBeenCalledWith(amount)
@@ -382,28 +382,28 @@ describe('LendingPool', () => {
   })
 
   it('should preview deposit', async () => {
-    const assets = BigNumber.from(100)
+    const assets = BigInt(100)
 
     await lendingPool.previewDeposit(assets)
     expect(mockLendingPool.previewDeposit).toHaveBeenCalledWith(assets)
   })
 
   it('should preview mint', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
 
     await lendingPool.previewMint(shares)
     expect(mockLendingPool.previewMint).toHaveBeenCalledWith(shares)
   })
 
   it('should preview redeem', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
 
     await lendingPool.previewRedeem(shares)
     expect(mockLendingPool.previewRedeem).toHaveBeenCalledWith(shares)
   })
 
   it('should preview withdraw', async () => {
-    const shares = BigNumber.from(100)
+    const shares = BigInt(100)
 
     await lendingPool.previewWithdraw(shares)
     expect(mockLendingPool.previewWithdraw).toHaveBeenCalledWith(shares)

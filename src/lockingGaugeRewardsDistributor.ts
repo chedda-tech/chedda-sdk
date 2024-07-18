@@ -1,18 +1,18 @@
-import { BigNumber, Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, Signer } from 'ethers'
 import LockingGaugeRewardsDistributorArtifact from './artifacts/LockingGaugeRewardsDistributor.json'
 
 export class LockingGaugeRewardsDistributor {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
     public signer: Signer,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
-  private initiateContract() {
+  private initializeContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
     }
@@ -20,9 +20,9 @@ export class LockingGaugeRewardsDistributor {
     this.contract = new ethers.Contract(this.address, LockingGaugeRewardsDistributorArtifact.abi, this.provider)
   }
 
-  async registerPool(contract: string): Promise<BigNumber> {
+  async registerPool(contract: string): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).registerPool(contract)
+      return await this.contract.connect(this.signer).getFunction('registerPool')(contract)
     } catch (error) {
       console.error('Error in registerPool:', error)
       throw error
@@ -31,23 +31,23 @@ export class LockingGaugeRewardsDistributor {
 
   async unregisterPool(contract: string): Promise<void> {
     try {
-      return await this.contract.connect(this.signer).unregisterPool(contract)
+      return await this.contract.connect(this.signer).getFunction('unregisterPool')(contract)
     } catch (error) {
       console.error('Error in unregisterPool:', error)
       throw error
     }
   }
 
-  async distribute(): Promise<BigNumber> {
+  async distribute(): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).distribute()
+      return await this.contract.connect(this.signer).getFunction('distribute')()
     } catch (error) {
       console.error('Error in distribute:', error)
       throw error
     }
   }
 
-  async totalWeightSum(): Promise<BigNumber> {
+  async totalWeightSum(): Promise<bigint> {
     try {
       return await this.contract.totalWeightSum()
     } catch (error) {
@@ -74,7 +74,7 @@ export class LockingGaugeRewardsDistributor {
     }
   }
 
-  async Konstant(): Promise<BigNumber> {
+  async Konstant(): Promise<bigint> {
     try {
       return await this.contract.Konstant()
     } catch (error) {
@@ -83,7 +83,7 @@ export class LockingGaugeRewardsDistributor {
     }
   }
 
-  async lockingPortion(): Promise<BigNumber> {
+  async lockingPortion(): Promise<bigint> {
     try {
       return await this.contract.lockingPortion()
     } catch (error) {
@@ -92,7 +92,7 @@ export class LockingGaugeRewardsDistributor {
     }
   }
 
-  async stakingPortion(): Promise<BigNumber> {
+  async stakingPortion(): Promise<bigint> {
     try {
       return await this.contract.stakingPortion()
     } catch (error) {

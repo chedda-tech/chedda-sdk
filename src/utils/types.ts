@@ -1,5 +1,3 @@
-import { BigNumber } from 'ethers'
-
 enum TokenType {
   ERC20,
   ERC721,
@@ -10,97 +8,97 @@ export interface IPoolStats {
   pool: string
   asset: string
   characterization: string
-  supplied: BigNumber
-  suppliedValue: BigNumber
-  borrowed: BigNumber
-  borrowedValue: BigNumber
-  baseSupplyAPY: BigNumber
-  maxSupplyAPY: BigNumber
-  baseBorrowAPY: BigNumber
-  maxBorrowAPY: BigNumber
-  utilization: BigNumber
-  feesPaid: BigNumber
-  tvl: BigNumber
+  supplied: bigint
+  suppliedValue: bigint
+  borrowed: bigint
+  borrowedValue: bigint
+  baseSupplyAPY: bigint
+  maxSupplyAPY: bigint
+  baseBorrowAPY: bigint
+  maxBorrowAPY: bigint
+  utilization: bigint
+  feesPaid: bigint
+  tvl: bigint
   collaterals: string[]
-  dailyRewards: BigNumber
-  rewardsAPY: BigNumber
+  dailyRewards: bigint
+  rewardsAPY: bigint
 }
 
 export interface IAggregateStats {
-  totalSuppliedValue: BigNumber
-  totalBorrowedValue: BigNumber
-  totalAvailableValue: BigNumber
-  totalFeesPaid: BigNumber
-  numberOfVaults: BigNumber
-  tvl: BigNumber
+  totalSuppliedValue: bigint
+  totalBorrowedValue: bigint
+  totalAvailableValue: bigint
+  totalFeesPaid: bigint
+  numberOfVaults: bigint
+  tvl: bigint
 }
 
 export interface IPoolCollateralInfo {
   collateral: string
-  amountDeposited: BigNumber
-  value: BigNumber
-  collateralFactor: BigNumber
+  amountDeposited: bigint
+  value: bigint
+  collateralFactor: bigint
 }
 
 export interface ICollateralDeposited {
   token: string
-  tokenType: BigNumber
-  amount: BigNumber
+  tokenType: bigint
+  amount: bigint
 }
 
 export interface IAccountCollateralDeposited {
   token: string
   decimals: number
-  amount: BigNumber
-  value: BigNumber
-  tokenIds: BigNumber[]
+  amount: bigint
+  value: bigint
+  tokenIds: bigint[]
 }
 
 export interface IAccountInfo {
-  walletAssetBalance: BigNumber
-  supplied: BigNumber
-  borrowed: BigNumber
+  walletAssetBalance: bigint
+  supplied: bigint
+  borrowed: bigint
   decimals: number
-  healthFactor: BigNumber
-  totalCollateralValue: BigNumber
+  healthFactor: bigint
+  totalCollateralValue: bigint
   collateralDeposited: IAccountCollateralDeposited[]
 }
 
 export interface ICollateralInfo {
   token: string
-  collateralFactor: BigNumber
+  collateralFactor: bigint
   tokenType: TokenType
 }
 
 export interface IInterestRates {
-  supplyRate: BigNumber
-  borrowRate: BigNumber
+  supplyRate: bigint
+  borrowRate: bigint
 }
 
 export interface IMarketInfo {
-  oraclePrice: BigNumber
-  oraclePriceDecimals: BigNumber
-  interestFee: BigNumber
-  supplyCap: BigNumber
-  liquidity: BigNumber
-  utilization: BigNumber
-  liquidationThreshold: BigNumber
-  liquidationPenalty: BigNumber
+  oraclePrice: bigint
+  oraclePriceDecimals: bigint
+  interestFee: bigint
+  supplyCap: bigint
+  liquidity: bigint
+  utilization: bigint
+  liquidationThreshold: bigint
+  liquidationPenalty: bigint
 }
 
 export interface IPoolState {
   pool: string
-  timestamp: BigNumber
-  supplied: BigNumber
-  borrowed: BigNumber
-  supplyRate: BigNumber
-  borrowRate: BigNumber
+  timestamp: bigint
+  supplied: bigint
+  borrowed: bigint
+  supplyRate: bigint
+  borrowRate: bigint
 }
 
 export interface IInterestRatesProjection {
-  utilization: BigNumber
-  supplyRate: BigNumber
-  borrowRate: BigNumber
+  utilization: bigint
+  supplyRate: bigint
+  borrowRate: bigint
 }
 
 export enum LockTime {
@@ -112,29 +110,29 @@ export enum LockTime {
 }
 
 export interface Lock {
-  amount: BigNumber
-  timeWeighted: BigNumber
-  expiry: BigNumber
-  rewardDebt: BigNumber
+  amount: bigint
+  timeWeighted: bigint
+  expiry: bigint
+  rewardDebt: bigint
   lockTime: LockTime
 }
 
 export interface INativeFee {
-  nativeFee: BigNumber
+  nativeFee: bigint
 }
 
-export type SendParam = (string | number | BigNumber | Uint8Array)[]
+export type SendParam = (string | number | bigint | Uint8Array)[]
 
 export interface IAccountSummary {
-  netValue: BigNumber
-  suppliedValue: BigNumber
-  borrowedValue: BigNumber
-  lockedValue: BigNumber
+  netValue: bigint
+  suppliedValue: bigint
+  borrowedValue: bigint
+  lockedValue: bigint
 }
 
 export interface IClaimableRewards {
-  reward1: BigNumber
-  reward2: BigNumber
+  reward1: bigint
+  reward2: bigint
 }
 
 export interface IPosition {
@@ -142,15 +140,15 @@ export interface IPosition {
   pool: string
   asset: string
   decimals: number
-  supplied: BigNumber
-  borrowed: BigNumber
-  suppliedValue: BigNumber
-  borrowedValue: BigNumber
-  collateralValue: BigNumber
-  healthFactor: BigNumber
-  staked: BigNumber
-  locked: BigNumber
-  stakeRewardsClaimable: BigNumber
-  lockRewardsClaimable: BigNumber
-  exposure: BigNumber
+  supplied: bigint
+  borrowed: bigint
+  suppliedValue: bigint
+  borrowedValue: bigint
+  collateralValue: bigint
+  healthFactor: bigint
+  staked: bigint
+  locked: bigint
+  stakeRewardsClaimable: bigint
+  lockRewardsClaimable: bigint
+  exposure: bigint
 }
