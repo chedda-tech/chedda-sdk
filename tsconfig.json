@@ -22,5 +22,10 @@
     "src/artifacts",
     "src/tests",
     "src/utils"
-  ]
+  ],
+  "ts-node": {
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+    "esm": true,
+  }
 }
