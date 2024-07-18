@@ -6,10 +6,10 @@ build({
   bundle: true,
   platform: 'node',
   target: ['es2022'],
-  outdir: './dist',
+  outfile: './dist/index.js',
   format: 'esm',
   sourcemap: true,
-  external: ['./node_modules/*'],
+  external: ['ethers', 'stream'],
   tsconfig: './tsconfig.json',
   logLevel: 'info', // Add this line for more verbose output
 }).catch((err) => {

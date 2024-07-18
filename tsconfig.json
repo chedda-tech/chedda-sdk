@@ -9,19 +9,16 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "moduleDetection": "force",
     "lib": ["esnext"],
   },
   "include": [
-    "src/"
+    "src"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "src/artifacts",
-    "src/tests",
-    "src/utils"
   ],
   "ts-node": {
     "experimentalSpecifierResolution": "node",
