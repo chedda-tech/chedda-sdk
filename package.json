@@ -20,8 +20,8 @@
     "start": "jest --watch",
     "test": "jest --detectOpenHandles",
     "coverage": "jest --coverage --coverageReporters='text-summary'",
-    "prepublishOnly": "tsc",
-    "prepare": "tsc"
+    "prepublishOnly": "node esbuild.config.js",
+    "prepare": "node esbuild.config.js"
   },
   "keywords": [
     "chedda, ethereum"
