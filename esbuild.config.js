@@ -1,5 +1,5 @@
 // esbuild.config.js
-import { build } from 'esbuild'
+const { build } = require('esbuild')
 
 build({
   entryPoints: ['./src/index.ts'],

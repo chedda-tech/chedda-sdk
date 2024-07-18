@@ -5,16 +5,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "type": "commonjs",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "exports": {
-    "require": "./index.cjs",
-    "import": "./index.js"
-  },
   "scripts": {
     "build": "node esbuild.config.js && tsc --emitDeclarationOnly --outDir dist",
     "start": "jest --watch",
