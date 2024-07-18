@@ -16,12 +16,12 @@
     "import": "./index.js"
   },
   "scripts": {
-    "build": "node esbuild.config.js",
+    "build": "node esbuild.config.js && tsc --emitDeclarationOnly --outDir dist",
     "start": "jest --watch",
     "test": "jest --detectOpenHandles",
     "coverage": "jest --coverage --coverageReporters='text-summary'",
-    "prepublishOnly": "node esbuild.config.js",
-    "prepare": "node esbuild.config.js"
+    "prepublishOnly": "node esbuild.config.js && tsc --emitDeclarationOnly --outDir dist",
+    "prepare": "node esbuild.config.js && tsc --emitDeclarationOnly --outDir dist"
   },
   "keywords": [
     "chedda, ethereum"

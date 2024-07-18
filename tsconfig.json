@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "Bundler",
     "moduleDetection": "force",
-    "lib": ["esnext"]
+    "lib": ["esnext"],
   },
   "include": [
     "src/"
