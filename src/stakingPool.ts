@@ -1,4 +1,4 @@
-import { Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, JsonRpcSigner } from 'ethers'
 import StakingPoolArtifact from './artifacts/StakingPool.json'
 
 export class StakingPool {
@@ -7,7 +7,7 @@ export class StakingPool {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    public signer: Signer,
+    public signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

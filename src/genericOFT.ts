@@ -1,4 +1,4 @@
-import { ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, JsonRpcSigner } from 'ethers'
 import GenericOFTArtifact from './artifacts/GenericOFT.json'
 import { SendParam } from './utils/types'
 
@@ -8,7 +8,7 @@ export class GenericOFT {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    private signer: Signer,
+    private signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

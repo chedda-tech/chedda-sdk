@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { LendingPool } from '../lendingPool'
 import { mockAddress, webSocketUrl } from '../utils/constants'
 import { mockLendingPool } from '../utils/mocks'
@@ -18,11 +18,11 @@ jest.mock('../lendingPool', () => {
 describe('LendingPool', () => {
   let lendingPool: LendingPool
   let mockProvider: ethers.JsonRpcProvider
-  let mockSigner: Signer
+  let mockSigner: JsonRpcSigner
 
   beforeEach(() => {
     mockProvider = new ethers.JsonRpcProvider(webSocketUrl)
-    mockSigner = ethers.Wallet.createRandom()
+    mockSigner = new ethers.JsonRpcSigner(mockProvider, '0x00')
     lendingPool = new LendingPool(mockProvider, mockAddress, mockSigner)
   })
 

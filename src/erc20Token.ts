@@ -1,4 +1,4 @@
-import { ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, JsonRpcSigner } from 'ethers'
 import ERC20 from './artifacts/ERC20.json'
 
 export class ERC20Token {
@@ -7,7 +7,7 @@ export class ERC20Token {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    private signer: Signer,
+    private signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

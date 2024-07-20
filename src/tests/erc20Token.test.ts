@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { ERC20Token } from '../erc20Token'
 import { mockERC20Token } from '../utils/mocks'
 import { webSocketUrl, mockAddress } from '../utils/constants'
@@ -17,13 +17,13 @@ jest.mock('../erc20Token', () => {
 
 describe('Token', () => {
   let token: ERC20Token
-  let signer: Signer
+  let signer: JsonRpcSigner
   let provider: ethers.JsonRpcProvider
 
   beforeEach(() => {
     jest.setTimeout(10000)
     provider = new ethers.JsonRpcProvider(webSocketUrl)
-    signer = ethers.Wallet.createRandom()
+    signer = new ethers.JsonRpcSigner(provider, '0x00')
     token = new ERC20Token(provider, mockAddress, signer)
   })
 

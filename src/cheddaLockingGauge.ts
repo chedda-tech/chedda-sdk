@@ -1,4 +1,4 @@
-import { Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, JsonRpcSigner } from 'ethers'
 import CheddaLockingGaugeArtifact from './artifacts/CheddaLockingGauge.json'
 import { Lock, LockTime } from './utils/types'
 
@@ -8,7 +8,7 @@ export class CheddaLockingGauge {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    public signer: Signer,
+    public signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

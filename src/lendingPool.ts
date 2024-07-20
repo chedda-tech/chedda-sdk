@@ -1,4 +1,4 @@
-import { Contract, ContractTransactionResponse, ethers, Signer } from 'ethers'
+import { Contract, ContractTransactionResponse, ethers, JsonRpcSigner } from 'ethers'
 import { ICollateralDeposited, IInterestRates } from './utils/types'
 import LendingPoolArtifact from './artifacts/LendingPool.json'
 
@@ -8,7 +8,7 @@ export class LendingPool {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    private signer: Signer,
+    private signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

@@ -1,4 +1,4 @@
-import { Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, JsonRpcSigner } from 'ethers'
 import InterestRatesProjectorArtifact from './artifacts/InterestRatesProjector.json'
 import { IInterestRatesProjection } from './utils/types'
 
@@ -8,7 +8,7 @@ export class InterestRatesProjector {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    public signer: Signer,
+    public signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

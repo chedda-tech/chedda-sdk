@@ -1,4 +1,4 @@
-import { ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, JsonRpcSigner } from 'ethers'
 import MarketNFT from './artifacts/MarketNFT.json'
 
 export class ERC721Token {
@@ -7,7 +7,7 @@ export class ERC721Token {
   constructor(
     private provider: ethers.JsonRpcProvider,
     private address: string,
-    private signer: Signer,
+    private signer: JsonRpcSigner,
   ) {
     this.initializeContract()
   }

@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcProvider, JsonRpcSigner } from 'ethers'
 import { Chedda } from '../base'
 import { mockAddress, webSocketUrl } from '../utils/constants'
 
@@ -7,12 +7,14 @@ jest.mock('ethers')
 
 describe('Chedda', () => {
   let chedda: Chedda
-  let signer: Signer
+  let signer: JsonRpcSigner
+  let mockProvider: JsonRpcProvider
 
   // Set up Chedda instance before the tests
   beforeAll(() => {
     chedda = new Chedda(webSocketUrl)
-    signer = ethers.Wallet.createRandom()
+    mockProvider = new ethers.JsonRpcProvider(webSocketUrl)
+    signer = new ethers.JsonRpcSigner(mockProvider, '0x00')
   })
 
   it('should create a Chedda instance', () => {

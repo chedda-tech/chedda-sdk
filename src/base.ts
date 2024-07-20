@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { ERC20Token } from './erc20Token'
 import { LendingPool } from './lendingPool'
 import { PriceOracle } from './priceOracle'
@@ -20,19 +20,19 @@ export class Chedda {
     this.provider = new ethers.JsonRpcProvider(provider, 'any')
   }
 
-  lendingPool(address: string, signer: Signer) {
+  lendingPool(address: string, signer: JsonRpcSigner) {
     return new LendingPool(this.provider, address, signer)
   }
 
-  erc20token(address: string, signer: Signer) {
+  erc20token(address: string, signer: JsonRpcSigner) {
     return new ERC20Token(this.provider, address, signer)
   }
 
-  poolLens(address: string, signer: Signer) {
+  poolLens(address: string, signer: JsonRpcSigner) {
     return new PoolLens(this.provider, address, signer)
   }
 
-  interestRateProjector(address: string, signer: Signer) {
+  interestRateProjector(address: string, signer: JsonRpcSigner) {
     return new InterestRatesProjector(this.provider, address, signer)
   }
 
@@ -40,35 +40,35 @@ export class Chedda {
     return new PriceOracle(this.provider, address)
   }
 
-  stakingPool(address: string, signer: Signer) {
+  stakingPool(address: string, signer: JsonRpcSigner) {
     return new StakingPool(this.provider, address, signer)
   }
 
-  cheddaLockingGauge(address: string, signer: Signer) {
+  cheddaLockingGauge(address: string, signer: JsonRpcSigner) {
     return new CheddaLockingGauge(this.provider, address, signer)
   }
 
-  lockingGaugeRewardsDistributor(address: string, signer: Signer) {
+  lockingGaugeRewardsDistributor(address: string, signer: JsonRpcSigner) {
     return new LockingGaugeRewardsDistributor(this.provider, address, signer)
   }
 
-  cheddaToken(address: string, signer: Signer) {
+  cheddaToken(address: string, signer: JsonRpcSigner) {
     return new CheddaToken(this.provider, address, signer)
   }
 
-  cheddaTokenBridged(address: string, signer: Signer) {
+  cheddaTokenBridged(address: string, signer: JsonRpcSigner) {
     return new CheddaTokenBridged(this.provider, address, signer)
   }
 
-  genericOFT(address: string, signer: Signer) {
+  genericOFT(address: string, signer: JsonRpcSigner) {
     return new GenericOFT(this.provider, address, signer)
   }
 
-  cheddaOFTAdapter(address: string, signer: Signer) {
+  cheddaOFTAdapter(address: string, signer: JsonRpcSigner) {
     return new CheddaOFTAdapter(this.provider, address, signer)
   }
 
-  accountActor(address: string, signer: Signer) {
+  accountActor(address: string, signer: JsonRpcSigner) {
     return new AccountActor(this.provider, address, signer)
   }
 }
