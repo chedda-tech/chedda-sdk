@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { InterestRatesProjector } from '../interestRatesProjector'
 import { mockAddress } from '../utils/constants'
 import { mockInterestRateProjector } from '../utils/mocks'
@@ -17,12 +17,12 @@ jest.mock('../interestRatesProjector', () => {
 
 describe('Interest Rate Projector', () => {
   let ratesProjector: InterestRatesProjector
-  let mockProvider: ethers.providers.JsonRpcProvider
-  let mockSigner: Signer
+  let mockProvider: ethers.JsonRpcProvider
+  let mockSigner: JsonRpcSigner
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.WebSocketProvider('webSocketUrl')
-    mockSigner = ethers.Wallet.createRandom()
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
+    mockSigner = new ethers.JsonRpcSigner(mockProvider, '0x00')
     ratesProjector = new InterestRatesProjector(mockProvider, mockAddress, mockSigner)
   })
 
@@ -32,7 +32,7 @@ describe('Interest Rate Projector', () => {
 
   it('should get interest projection', async () => {
     const interestRatesModel = mockAddress
-    const utilizations = [BigNumber.from(2), BigNumber.from(4), BigNumber.from(6)]
+    const utilizations = [BigInt(2), BigInt(4), BigInt(6)]
     await ratesProjector.projection(interestRatesModel, utilizations)
     expect(mockInterestRateProjector.projection).toHaveBeenCalled()
   })

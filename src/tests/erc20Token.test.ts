@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { ERC20Token } from '../erc20Token'
 import { mockERC20Token } from '../utils/mocks'
 import { webSocketUrl, mockAddress } from '../utils/constants'
@@ -17,13 +17,13 @@ jest.mock('../erc20Token', () => {
 
 describe('Token', () => {
   let token: ERC20Token
-  let signer: Signer
-  let provider: ethers.providers.JsonRpcProvider
+  let signer: JsonRpcSigner
+  let provider: ethers.JsonRpcProvider
 
   beforeEach(() => {
     jest.setTimeout(10000)
-    provider = new ethers.providers.WebSocketProvider(webSocketUrl)
-    signer = ethers.Wallet.createRandom()
+    provider = new ethers.JsonRpcProvider(webSocketUrl)
+    signer = new ethers.JsonRpcSigner(provider, '0x00')
     token = new ERC20Token(provider, mockAddress, signer)
   })
 
@@ -47,7 +47,7 @@ describe('Token', () => {
 
   it('should approve transactions', async () => {
     const spender = '0x364062f04922CccB89bbbE1fd03b735D09A50662'
-    const amount = ethers.utils.parseEther('1')
+    const amount = ethers.parseEther('1')
     mockERC20Token.approve.mockResolvedValue(undefined)
     await token.approve(spender, amount)
     expect(mockERC20Token.approve).toHaveBeenCalledTimes(1)
@@ -57,7 +57,7 @@ describe('Token', () => {
   it('should check allowance', async () => {
     const account = '0xAccount'
     const spender = '0x364062f04922CccB89bbbE1fd03b735D09A50662'
-    const allowanceValue = ethers.utils.parseEther('0.5')
+    const allowanceValue = ethers.parseEther('0.5')
     mockERC20Token.allowance.mockResolvedValue(allowanceValue)
     const allowance = await token.allowance(account, spender)
     expect(allowance).toEqual(allowanceValue)
@@ -67,7 +67,7 @@ describe('Token', () => {
 
   it('should get balance of an account', async () => {
     const account = '0xAccount'
-    const balanceValue = ethers.utils.parseEther('10')
+    const balanceValue = ethers.parseEther('10')
     mockERC20Token.balanceOf.mockResolvedValue(balanceValue)
     const balance = await token.balanceOf(account)
     expect(balance).toEqual(balanceValue)
@@ -87,7 +87,7 @@ describe('Token', () => {
 
   it('should transfer tokens', async () => {
     const to = '0xReceiver'
-    const amount = ethers.utils.parseEther('2')
+    const amount = ethers.parseEther('2')
     mockERC20Token.transfer.mockResolvedValue(undefined)
     await token.transfer(to, amount)
     expect(mockERC20Token.transfer).toHaveBeenCalledTimes(1)
@@ -95,7 +95,7 @@ describe('Token', () => {
   })
 
   it('should get the total supply of tokens', async () => {
-    const totalSupplyValue = ethers.utils.parseEther('100')
+    const totalSupplyValue = ethers.parseEther('100')
     mockERC20Token.totalSupply.mockResolvedValue(totalSupplyValue)
     const totalSupply = await token.totalSupply()
     expect(totalSupply).toEqual(totalSupplyValue)

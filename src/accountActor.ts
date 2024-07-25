@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Contract, Signer } from 'ethers'
+import { ethers, Contract, JsonRpcSigner } from 'ethers'
 import AccountActorArtifact from './artifacts/AccountActor.json'
 import { IAccountSummary, IPosition } from './utils/types'
 
@@ -6,11 +6,11 @@ export class AccountActor {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
-    private signer: Signer,
+    private signer: JsonRpcSigner,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
   async accountSummary(account: string): Promise<IAccountSummary> {
@@ -22,7 +22,7 @@ export class AccountActor {
     }
   }
 
-  async allClaimableRewards(account: string): Promise<BigNumber[]> {
+  async allClaimableRewards(account: string): Promise<bigint[]> {
     try {
       return await this.contract.allClaimableRewards(account)
     } catch (error) {
@@ -31,9 +31,9 @@ export class AccountActor {
     }
   }
 
-  async claimAllRewards(account: string): Promise<BigNumber> {
+  async claimAllRewards(account: string): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).claimAllRewards(account)
+      return await this.contract.connect(this.signer).getFunction('claimAllRewards')(account)
     } catch (error) {
       console.error('Error in claimAllRewards:', error)
       throw error
@@ -58,8 +58,8 @@ export class AccountActor {
     }
   }
 
-  initiateContract() {
-    let abi: ethers.ContractInterface = AccountActorArtifact.abi
+  initializeContract() {
+    let abi: ethers.InterfaceAbi = AccountActorArtifact.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')

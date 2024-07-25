@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { LockingGaugeRewardsDistributor } from '../lockingGaugeRewardsDistributor'
 import { mockAddress } from '../utils/constants'
 import { mockLockingGaugeRewardsDistributor, mockPoolLens } from '../utils/mocks'
@@ -17,12 +17,12 @@ jest.mock('../lockingGaugeRewardsDistributor', () => {
 
 describe('CheddaLockGauge', () => {
   let lockingGaugeRewardsDistributor: LockingGaugeRewardsDistributor
-  let mockProvider: ethers.providers.JsonRpcProvider
-  let mockSigner: Signer
+  let mockProvider: ethers.JsonRpcProvider
+  let mockSigner: JsonRpcSigner
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.JsonRpcProvider('webSocketUrl')
-    mockSigner = ethers.Wallet.createRandom()
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
+    mockSigner = new ethers.JsonRpcSigner(mockProvider, '0x00')
     lockingGaugeRewardsDistributor = new LockingGaugeRewardsDistributor(mockProvider, mockAddress, mockSigner)
   })
 

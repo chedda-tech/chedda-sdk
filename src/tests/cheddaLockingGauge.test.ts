@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { CheddaLockingGauge } from '../cheddaLockingGauge'
 import { mockAddress } from '../utils/constants'
 import { mockCheddaLockingGauge, mockPoolLens } from '../utils/mocks'
@@ -17,12 +17,12 @@ jest.mock('../cheddaLockingGauge', () => {
 
 describe('CheddaLockGauge', () => {
   let cheddaLockGauge: CheddaLockingGauge
-  let mockProvider: ethers.providers.JsonRpcProvider
-  let mockSigner: Signer
+  let mockProvider: ethers.JsonRpcProvider
+  let mockSigner: JsonRpcSigner
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.JsonRpcProvider('webSocketUrl')
-    mockSigner = ethers.Wallet.createRandom()
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
+    mockSigner = new ethers.JsonRpcSigner(mockProvider, '0x00')
     cheddaLockGauge = new CheddaLockingGauge(mockProvider, mockAddress, mockSigner)
   })
 
@@ -31,7 +31,7 @@ describe('CheddaLockGauge', () => {
   })
 
   it('should add to lock', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
     await cheddaLockGauge.addToLock(amount)
     expect(mockCheddaLockingGauge.addToLock).toHaveBeenCalled()
   })
@@ -42,7 +42,7 @@ describe('CheddaLockGauge', () => {
   })
 
   it('should create lock', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
     await cheddaLockGauge.createLock(amount, 1)
     expect(mockCheddaLockingGauge.createLock).toHaveBeenCalled()
   })
@@ -72,7 +72,7 @@ describe('CheddaLockGauge', () => {
   })
 
   it('should add rewards', async () => {
-    const amount = BigNumber.from(100)
+    const amount = BigInt(100)
 
     await cheddaLockGauge.addRewards(amount)
     expect(mockCheddaLockingGauge.addRewards).toHaveBeenCalledWith(amount)

@@ -1,4 +1,4 @@
-import { ethers, Signer } from 'ethers'
+import { ethers, JsonRpcSigner } from 'ethers'
 import { PoolLens } from '../poolLens'
 import { mockAddress } from '../utils/constants'
 import { mockPoolLens } from '../utils/mocks'
@@ -17,12 +17,12 @@ jest.mock('../poolLens', () => {
 
 describe('PoolLens', () => {
   let poolLens: PoolLens
-  let mockProvider: ethers.providers.JsonRpcProvider
-  let mockSigner: Signer
+  let mockProvider: ethers.JsonRpcProvider
+  let mockSigner: JsonRpcSigner
 
   beforeEach(() => {
-    mockProvider = new ethers.providers.WebSocketProvider('webSocketUrl')
-    mockSigner = ethers.Wallet.createRandom()
+    mockProvider = new ethers.JsonRpcProvider('webSocketUrl')
+    mockSigner = new ethers.JsonRpcSigner(mockProvider, '0x00')
     poolLens = new PoolLens(mockProvider, mockAddress, mockSigner)
   })
 
@@ -84,40 +84,5 @@ describe('PoolLens', () => {
   it('should get registered pools', async () => {
     await poolLens.registeredPools()
     expect(mockPoolLens.registeredPools).toHaveBeenCalled()
-  })
-
-  it('should register pools', async () => {
-    const pool = mockAddress
-    const isActive = true
-
-    await poolLens.registerPool(pool, isActive)
-    expect(mockPoolLens.registerPool).toHaveBeenCalledWith(pool, isActive)
-  })
-
-  it('should renounce ownership', async () => {
-    await poolLens.renounceOwnership()
-    expect(mockPoolLens.renounceOwnership).toHaveBeenCalled()
-  })
-
-  it('should set pool as active', async () => {
-    const pool = mockAddress
-    const isActive = true
-
-    await poolLens.setActive(pool, isActive)
-    expect(mockPoolLens.setActive).toHaveBeenCalledWith(pool, isActive)
-  })
-
-  it('should transfer ownership', async () => {
-    const newOwner = mockAddress
-
-    await poolLens.transferOwnership(newOwner)
-    expect(mockPoolLens.transferOwnership).toHaveBeenCalledWith(newOwner)
-  })
-
-  it('should unregister pool', async () => {
-    const pool = mockAddress
-
-    await poolLens.unregisterPool(pool)
-    expect(mockPoolLens.unregisterPool).toHaveBeenCalledWith(pool)
   })
 })

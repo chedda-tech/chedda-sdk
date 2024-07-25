@@ -1,18 +1,18 @@
-import { BigNumber, Contract, ethers, Signer } from 'ethers'
+import { Contract, ethers, JsonRpcSigner } from 'ethers'
 import StakingPoolArtifact from './artifacts/StakingPool.json'
 
 export class StakingPool {
   public contract!: Contract
 
   constructor(
-    private provider: ethers.providers.JsonRpcProvider,
+    private provider: ethers.JsonRpcProvider,
     private address: string,
-    public signer: Signer,
+    public signer: JsonRpcSigner,
   ) {
-    this.initiateContract()
+    this.initializeContract()
   }
 
-  private initiateContract() {
+  private initializeContract() {
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
     }
@@ -20,34 +20,34 @@ export class StakingPool {
     this.contract = new ethers.Contract(this.address, StakingPoolArtifact.abi, this.provider)
   }
 
-  async stake(amount: BigNumber): Promise<BigNumber> {
+  async stake(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).stake(amount)
+      return await this.contract.connect(this.signer).getFunction('stake')(amount)
     } catch (error) {
       console.error('Error in stake:', error)
       throw error
     }
   }
 
-  async unStake(amount: BigNumber): Promise<BigNumber> {
+  async unStake(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).unstake(amount)
+      return await this.contract.connect(this.signer).getFunction('unstake')(amount)
     } catch (error) {
       console.error('Error in unStake:', error)
       throw error
     }
   }
 
-  async claim(): Promise<BigNumber> {
+  async claim(): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).claim()
+      return await this.contract.connect(this.signer).getFunction('claim')()
     } catch (error) {
       console.error('Error in claim:', error)
       throw error
     }
   }
 
-  async claimable(account: string): Promise<BigNumber> {
+  async claimable(account: string): Promise<bigint> {
     try {
       return await this.contract.claimable(account)
     } catch (error) {
@@ -56,7 +56,7 @@ export class StakingPool {
     }
   }
 
-  async stakingBalance(account: string): Promise<BigNumber> {
+  async stakingBalance(account: string): Promise<bigint> {
     try {
       return await this.contract.stakingBalance(account)
     } catch (error) {
@@ -65,9 +65,9 @@ export class StakingPool {
     }
   }
 
-  async addRewards(amount: BigNumber): Promise<BigNumber> {
+  async addRewards(amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.connect(this.signer).addRewards(amount)
+      return await this.contract.connect(this.signer).getFunction('addRewards')(amount)
     } catch (error) {
       console.error('Error in addrewards:', error)
       throw error

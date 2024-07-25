@@ -1,24 +1,28 @@
 {
-  "include": ["src"],
   "compilerOptions": {
-    "target": "es2018",
-    "module": "esnext",
-    "importHelpers": true,
+    "target": "esnext",
+    "module": "ESNext",
     "declaration": true,
-    "sourceMap": true,
+    "outDir": "./dist",
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "moduleDetection": "force",
+    "lib": ["esnext"],
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+  "ts-node": {
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+    "esm": true,
   }
 }
