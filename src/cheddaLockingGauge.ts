@@ -57,15 +57,6 @@ export class CheddaLockingGauge {
     }
   }
 
-  async getLock(address: string): Promise<Lock> {
-    try {
-      return await this.contract.connect(this.signer).getFunction('getLock')(address)
-    } catch (error) {
-      console.error('Error in getLock:', error)
-      throw error
-    }
-  }
-
   async claim(): Promise<bigint> {
     try {
       return await this.contract.connect(this.signer).getFunction('claim')()
@@ -89,6 +80,15 @@ export class CheddaLockingGauge {
       return await this.contract.connect(this.signer).getFunction('addRewards')(amount)
     } catch (error) {
       console.error('Error in addRewards:', error)
+      throw error
+    }
+  }
+
+  async getLock(address: string): Promise<Lock> {
+    try {
+      return await this.contract.getLock(address)
+    } catch (error) {
+      console.error('Error in getLock:', error)
       throw error
     }
   }
