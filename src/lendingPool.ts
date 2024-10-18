@@ -399,11 +399,11 @@ export class LendingPool {
     }
   }
 
-  async getTokenCollateralValue(token: string, amount: bigint): Promise<bigint> {
+  async tokenMaxLoanValue(token: string, amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.getTokenCollateralValue(token, amount)
+      return await this.contract.tokenMaxLoanValue(token, amount)
     } catch (error) {
-      console.error('Error in getTokenCollateralValue:', error)
+      console.error('Error in tokenMaxLoanValue:', error)
       throw error
     }
   }
@@ -579,11 +579,11 @@ export class LendingPool {
     }
   }
 
-  async totalAccountCollateralValue(account: string): Promise<bigint> {
+  async accountMaxLoanValue(account: string): Promise<bigint> {
     try {
-      return await this.contract.totalAccountCollateralValue(account)
+      return await this.contract.accountMaxLoanValue(account)
     } catch (error) {
-      console.error('Error in totalAccountCollateralValue:', error)
+      console.error('Error in accountMaxLoanValue:', error)
       throw error
     }
   }

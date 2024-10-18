@@ -1,8 +1,8 @@
 import { ethers, Contract, JsonRpcSigner } from 'ethers'
-import GenericOFTArtifact from './artifacts/GenericOFT.json'
+import CXTokenArtifact from './artifacts/CXToken.json'
 import { SendParam } from './utils/types'
 
-export class GenericOFT {
+export class CXToken {
   public contract!: Contract
 
   constructor(
@@ -119,7 +119,7 @@ export class GenericOFT {
   }
 
   initializeContract() {
-    let abi: ethers.InterfaceAbi = GenericOFTArtifact.abi
+    let abi: ethers.InterfaceAbi = CXTokenArtifact.abi
 
     if (!this.address || !this.provider) {
       throw new Error('Missing required data for contract initiation.')
