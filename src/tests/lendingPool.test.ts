@@ -305,12 +305,12 @@ describe('LendingPool', () => {
     expect(mockLendingPool.gauge).toHaveBeenCalled()
   })
 
-  it('should get token collateral value', async () => {
+  it('should get token max loan value', async () => {
     const token = mockAddress
     const amount = BigInt(100)
 
-    await lendingPool.getTokenCollateralValue(token, amount)
-    expect(mockLendingPool.getTokenCollateralValue).toHaveBeenCalledWith(token, amount)
+    await lendingPool.tokenMaxLoanValue(token, amount)
+    expect(mockLendingPool.tokenMaxLoanValue).toHaveBeenCalledWith(token, amount)
   })
 
   it('should get token market value', async () => {
@@ -424,11 +424,11 @@ describe('LendingPool', () => {
     expect(mockLendingPool.symbol).toHaveBeenCalled()
   })
 
-  it('should get total account collateral value', async () => {
+  it('should get account max loan value', async () => {
     const owner = mockAddress
 
-    await lendingPool.totalAccountCollateralValue(owner)
-    expect(mockLendingPool.totalAccountCollateralValue).toHaveBeenCalledWith(owner)
+    await lendingPool.accountMaxLoanValue(owner)
+    expect(mockLendingPool.accountMaxLoanValue).toHaveBeenCalledWith(owner)
   })
 
   it('should get total assets', async () => {

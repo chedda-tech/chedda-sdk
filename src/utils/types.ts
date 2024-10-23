@@ -37,7 +37,7 @@ export interface IPoolCollateralInfo {
   collateral: string
   amountDeposited: bigint
   value: bigint
-  collateralFactor: bigint
+  ltv: bigint
 }
 
 export interface ICollateralDeposited {
@@ -99,6 +99,7 @@ export interface IInterestRatesProjection {
   utilization: bigint
   supplyRate: bigint
   borrowRate: bigint
+  effectiveSupplyRate: bigint
 }
 
 export enum LockTime {

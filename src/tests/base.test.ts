@@ -77,9 +77,9 @@ describe('Chedda', () => {
     expect(cheddaOFTAdapter).toBeDefined()
   })
 
-  it('should create a genericOFT instance', () => {
-    const genericOFT = chedda.genericOFT(mockAddress, signer)
-    expect(genericOFT).toBeDefined()
+  it('should create a cxToken instance', () => {
+    const cxToken = chedda.cxToken(mockAddress, signer)
+    expect(cxToken).toBeDefined()
   })
 
   it('should create a accountActor instance', () => {
