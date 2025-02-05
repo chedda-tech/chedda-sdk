@@ -150,8 +150,8 @@ describe('LendingPool', () => {
   it('should get account assets borrowed', async () => {
     const account = mockAddress
 
-    await lendingPool.accountAssetsBorrowed(account)
-    expect(mockLendingPool.accountAssetsBorrowed).toHaveBeenCalledWith(account)
+    await lendingPool.assetsBorrowed(account)
+    expect(mockLendingPool.assetsBorrowed).toHaveBeenCalledWith(account)
   })
 
   it('should get account collateral amount', async () => {
@@ -309,16 +309,16 @@ describe('LendingPool', () => {
     const token = mockAddress
     const amount = BigInt(100)
 
-    await lendingPool.tokenMaxLoanValue(token, amount)
-    expect(mockLendingPool.tokenMaxLoanValue).toHaveBeenCalledWith(token, amount)
+    await lendingPool.tokenLoanValue(token, amount)
+    expect(mockLendingPool.tokenLoanValue).toHaveBeenCalledWith(token, amount)
   })
 
   it('should get token market value', async () => {
     const token = mockAddress
     const amount = BigInt(100)
 
-    await lendingPool.getTokenMarketValue(token, amount)
-    expect(mockLendingPool.getTokenMarketValue).toHaveBeenCalledWith(token, amount)
+    await lendingPool.tokenMarketValue(token, amount)
+    expect(mockLendingPool.tokenMarketValue).toHaveBeenCalledWith(token, amount)
   })
 
   it('should get interest rate model', async () => {
