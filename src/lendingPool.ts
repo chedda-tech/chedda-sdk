@@ -401,7 +401,7 @@ export class LendingPool {
 
   async tokenLoanValue(token: string, amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.tokenMaxLoanValue(token, amount)
+      return await this.contract.tokenLoanValue(token, amount)
     } catch (error) {
       console.error('Error in tokenLoanValue:', error)
       throw error
