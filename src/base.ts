@@ -12,6 +12,7 @@ import { CXToken } from './cxToken'
 import { CheddaOFTAdapter } from './cheddaOFTAdapter'
 import { CheddaTokenBridged } from './cheddaTokenBridged'
 import { AccountActor } from './accountActor'
+import { DIAPriceOracle } from './diaPriceOracle'
 
 export class Chedda {
   provider: ethers.JsonRpcProvider
@@ -38,6 +39,10 @@ export class Chedda {
 
   priceOracle(address: string) {
     return new PriceOracle(this.provider, address)
+  }
+
+  diaPriceOracle(address: string) {
+    return new DIAPriceOracle(this.provider, address)
   }
 
   stakingPool(address: string, signer: JsonRpcSigner) {

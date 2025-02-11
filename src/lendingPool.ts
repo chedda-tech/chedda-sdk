@@ -1,5 +1,5 @@
 import { Contract, ContractTransactionResponse, ethers, JsonRpcSigner } from 'ethers'
-import { ICollateralDeposited, IInterestRates } from './utils/types'
+import { AccountValue, ICollateralDeposited, IInterestRates } from './utils/types'
 import LendingPoolArtifact from './artifacts/LendingPool.json'
 
 export class LendingPool {
@@ -174,11 +174,11 @@ export class LendingPool {
 
   //Read contract ---------------------------------------------
 
-  async accountAssetsBorrowed(account: string): Promise<bigint> {
+  async assetsBorrowed(account: string): Promise<bigint> {
     try {
       return await this.contract.accountAssetsBorrowed(account)
     } catch (error) {
-      console.error('Error in accountAssetsBorrowed:', error)
+      console.error('Error in assetsBorrowed:', error)
       throw error
     }
   }
@@ -399,20 +399,20 @@ export class LendingPool {
     }
   }
 
-  async tokenMaxLoanValue(token: string, amount: bigint): Promise<bigint> {
+  async tokenLoanValue(token: string, amount: bigint): Promise<bigint> {
     try {
-      return await this.contract.tokenMaxLoanValue(token, amount)
+      return await this.contract.tokenLoanValue(token, amount)
     } catch (error) {
-      console.error('Error in tokenMaxLoanValue:', error)
+      console.error('Error in tokenLoanValue:', error)
       throw error
     }
   }
 
-  async getTokenMarketValue(token: string, amount: bigint): Promise<bigint> {
+  async tokenMarketValue(token: string, amount: bigint): Promise<bigint> {
     try {
       return await this.contract.getTokenMarketValue(token, amount)
     } catch (error) {
-      console.error('Error in getTokenMarketValue:', error)
+      console.error('Error in tokenMarketValue:', error)
       throw error
     }
   }
@@ -588,6 +588,16 @@ export class LendingPool {
     }
   }
 
+  async totalAccountLiquidationValue(account: string, valueType: AccountValue): Promise<bigint> {
+    // Added enum type for valueType
+    try {
+      return await this.contract.totalAccountLiquidationValue(account, valueType)
+    } catch (error) {
+      console.error('Error in totalAccountLiquidationValue:', error)
+      throw error
+    }
+  }
+
   async totalAssets(): Promise<bigint> {
     try {
       return await this.contract.totalAssets()
@@ -606,9 +616,9 @@ export class LendingPool {
     }
   }
 
-  async tvl(): Promise<bigint> {
+  async tvl(includeBorrows: boolean = true): Promise<bigint> {
     try {
-      return await this.contract.tvl()
+      return await this.contract.tvl(includeBorrows)
     } catch (error) {
       console.error('Error in tvl:', error)
       throw error

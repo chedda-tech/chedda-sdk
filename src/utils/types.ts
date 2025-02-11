@@ -4,6 +4,12 @@ enum TokenType {
   ERC1155,
 }
 
+export enum AccountValue {
+  Market,
+  Loan,
+  Liquidation,
+}
+
 export interface IPoolStats {
   pool: string
   asset: string
