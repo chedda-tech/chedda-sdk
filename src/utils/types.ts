@@ -44,6 +44,9 @@ export interface IPoolCollateralInfo {
   amountDeposited: bigint
   value: bigint
   ltv: bigint
+  lltv: bigint
+  liqPenalty: bigint
+  liqBonus: bigint
 }
 
 export interface ICollateralDeposited {
